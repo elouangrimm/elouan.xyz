@@ -1,5 +1,14 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const imagePaths = ["/photos/images/image1.png"];
+    const imagePaths = [
+        "/photos/images/image1.JPG",
+        "/photos/images/image2.JPG",
+        "/photos/images/image3.JPG",
+        "/photos/images/image4.JPG",
+        "/photos/images/image5.JPG",
+        "/photos/images/image6.JPG",
+        "/photos/images/image7.JPG",
+
+    ];
     let currentIndex = -1;
 
     const gallery = document.querySelector(".gallery");
