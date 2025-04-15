@@ -6,13 +6,29 @@
         <title>Photos | elouan.xyz</title>
         <link rel="stylesheet" href="/styles/style.css" />
 
-        <script data-goatcounter="https://elouan.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+        <script
+            data-goatcounter="https://elouan.goatcounter.com/count"
+            async
+            src="//gc.zgo.at/count.js"
+        ></script>
     </head>
     <body>
-        <h1>Whoops!</h1>
-        <p>The Photos page is in progress. Check back later to see when it's done!</p>
+        <div class="gallery-container">
+            <div class="gallery"></div>
+        </div>
+
+        <div class="fullscreen-overlay" style="display: none;">
+            <span class="close-button">&times;</span>
+            <div class="fullscreen-content">
+                <span class="arrow left-arrow">&lt;</span>
+                <img src="" alt="Full Size Image" class="fullscreen-image" />
+                <span class="arrow right-arrow">&gt;</span>
+            </div>
+        </div>
 
         <hr />
         <a href="/">Back to elouan.xyz</a>
+
+        <script src="/scripts/gallery.js"></script>
     </body>
 </html>
