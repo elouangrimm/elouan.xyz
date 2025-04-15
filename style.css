@@ -33,10 +33,10 @@
     --elouan: #7DB84F;
 
     /* link colors */
-    --github:var(--stone-100);
+    --github: var(--stone-100);
     --bluesky: #048bff;
-    --email:var(--violet);
-    --rss:var(--orange);
+    --email: var(--violet);
+    --rss: var(--orange);
     --reddit: #FF4500;
 
 
@@ -114,4 +114,28 @@ label {
     >* {
         display: block;
     }
+}
+
+button {
+    --color: var(--fuchsia);
+    color: var(--color);
+
+    &:hover {
+        background-color: var(--color);
+        color: var(--stone-050);
+        outline: 2px solid var(--color);
+    }
+
+    &:focus {
+        outline: 2px solid var(--color);
+        text-decoration: none;
+    }
+
+    color: var(--stone-050);
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
 }
