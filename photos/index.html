@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Photos | elouan.xyz</title>
         <link rel="stylesheet" href="/styles/style.css" />
+        <link
 
         <script
             data-goatcounter="https://elouan.goatcounter.com/count"
@@ -18,17 +19,22 @@
         </div>
 
         <div class="fullscreen-overlay" style="display: none;">
-            <span class="close-button">&times;</span>
             <div class="fullscreen-content">
-                <span class="arrow left-arrow">&lt;</span>
-                <img src="" alt="Full Size Image" class="fullscreen-image" />
-                <span class="arrow right-arrow">&gt;</span>
+              <img src="" alt="Fullscreen Image" class="fullscreen-image" />
+              <div class="image-description"></div>
+              <span class="close-button">&times;</span>
             </div>
-        </div>
+          </div>
 
         <hr />
         <a href="/">Back to elouan.xyz</a>
 
+        <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.min.js"
+      integrity="sha512-3LU42oRiPzv/qA5QTgTF+R97b6iNtsQg0F6Wd+t0gX7u9bYqFCkF8yWv/385Cp17Kn3e1E3xG4W6d6d0mN0Hdg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
         <script src="/scripts/gallery.js"></script>
     </body>
 </html>
