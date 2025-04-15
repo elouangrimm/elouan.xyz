@@ -17,7 +17,8 @@
     --amber: #f59e0b;
     --yellow: #eab308;
     --lime: #84cc16;
-    --green: #22c55e;
+    --green: #7DB84F;
+    --real-green: #22c55e;
     --emerald: #10b981;
     --teal: #14b8a6;
     --cyan: #06b6d4;
@@ -30,15 +31,13 @@
     --pink: #ec4899;
     --rose: #f43f5e;
 
-    --elouan: #7DB84F;
-
     /* link colors */
     --github: var(--stone-100);
     --bluesky: #048bff;
     --email: var(--violet);
     --rss: var(--orange);
     --reddit: #FF4500;
-
+    --signal: #3A76F0;
 
     --font-mono: 'JetBrains Mono', 'SF Mono', 'Roboto Mono', 'Cascadia Code', monospace;
 }
