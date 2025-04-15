@@ -43,13 +43,6 @@
     --font-mono: 'JetBrains Mono', 'SF Mono', 'Roboto Mono', 'Cascadia Code', monospace;
 }
 
-textarea,
-input {
-    font: inherit;
-    letter-spacing: inherit;
-    word-spacing: inherit;
-}
-
 body {
     font-family: Inter, sans-serif;
     max-width: 750px;
@@ -78,7 +71,7 @@ ul {
 
 *::selection {
     background-color: var(--indigo);
-    color: var(--stone-300);
+    color: var(--stone-600);
 }
 
 a.big {
@@ -131,6 +124,7 @@ button {
         text-decoration: none;
     }
 
+    background-color: var(--stone-800);
     color: var(--stone-050);
     border: none;
     cursor: pointer;
