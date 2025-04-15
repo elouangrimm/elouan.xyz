@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <title>RSS Feed - elouan.xyz</title>
+        <link rel="stylesheet" href="/style.css" />
+        <style>
+            h4 .danger {
+                display: inline;
+                font-weight: normal;
+                color: var(--red);
+            }
+        </style>
+    </head>
+    <body>
+        <script>
+            const copyLink = (selector) => {
+                const element = document.querySelector(selector);
+                const text = element.href;
+                if (!text) {
+                    console.warn(`${selector} didn't contain any text`);
+                }
+                const style = element.style;
+                element.style =
+                    "background-color: var(--green); color: var(--stone-050);outline: 2px solid var(--green);";
+                setTimeout(() => {
+                    element.style = style;
+                }, 500);
+
+                navigator.clipboard.writeText(text);
+            };
+        </script>
+
+        <h1>RSS Feed</h1>
+
+        <h4 style="margin-bottom: 0.3em">Elouan.xyz feed</h4>
+        <a id="rss_global" href="https://elouan.xyz/feed.xml"
+            >https://elouan.xyz/feed.xml</a
+        ><button
+            style="margin: 0 0.5em 0.7em"
+            onclick="copyLink('a#rss_global')"
+        >
+            Copy Link
+        </button>
+
+        <hr />
+        <a href="/">Back to elouan.xyz</a>
+    </body>
+</html>

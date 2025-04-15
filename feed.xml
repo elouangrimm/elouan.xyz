@@ -1,0 +1,13 @@
+<rss version="2.0">
+    <channel>
+        <title>elouan.xyz</title>
+        <link>https://elouan.xyz</link>
+        <description>The site of Elouan Grimm</description>
+        <item>
+            <title>Welcome to elouan.xyz</title>
+            <link>https://elouan.xyz/</link>
+            <guid>https://elouan.xyz/</guid>
+            <pubDate>Tue, 15 Apr 2025 00:19:45 GMT</pubDate>
+        </item>
+    </channel>
+</rss>

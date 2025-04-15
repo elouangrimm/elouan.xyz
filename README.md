@@ -1,2 +1,5 @@
-# elouangrimm.github.io
-New website, much simpler and I actually made it! Just plain HTML5.
+# elouan.xyz
+
+## New website, much simpler and I actually made it! Just plain HTML5. ^^
+
+Inspired by [Svenlaa.com](svenlaa.com), so thanks a lot!
