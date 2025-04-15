@@ -2,4 +2,4 @@
 
 ## New website, much simpler and I actually made it! Just plain HTML5. ^^
 
-Inspired by [Svenlaa.com](svenlaa.com), so thanks a lot!
+Inspired by [Svenlaa.com](https://svenlaa.com), so thanks a lot!
