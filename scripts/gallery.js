@@ -7,151 +7,229 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const repoOwner = 'elouangrimm';
     const repoName = 'photos';
-    const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/`;
+    const repoRootUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/`;
+    const rawBaseUrl = `https://raw.githubusercontent.com/${repoOwner}/${repoName}/${branch}/`;
 
     let imagesData = []; // Store { src, description, element }
     let currentIndex = -1;
 
-    // --- Fetch images from GitHub ---
     async function fetchImages() {
         try {
-            const response = await fetch(apiUrl);
+            console.log("Fetching repository contents from:", repoRootUrl);
+            const response = await fetch(repoRootUrl); // Fetch root directory contents
+            console.log("GitHub API response status:", response.status, response.statusText);
+
             if (!response.ok) {
-                throw new Error(`GitHub API Error: ${response.status} ${response.statusText}`);
+                let errorBody = 'Could not read error body.';
+                try { errorBody = await response.text(); } catch (e) { /* ignore */ }
+                console.error("GitHub API Error Response Body:", errorBody);
+                throw new Error(`GitHub API Error: ${response.status} ${response.statusText}.`);
             }
+
             const files = await response.json();
+            console.log("Raw file list received:", files);
 
             const imageFiles = files.filter(file =>
                 file.type === 'file' && /\.(jpe?g|png|gif|webp)$/i.test(file.name)
             );
+            console.log("Filtered image files:", imageFiles);
 
             if (imageFiles.length === 0) {
-                gallery.innerHTML = '<p>Images failed loading! :( <br> The repo is empty!</p>';
+                gallery.innerHTML = '<p>No images found in the repository root (after filtering).</p>';
                 return;
             }
 
             gallery.innerHTML = ''; // Clear loading message
 
-            // Create gallery items and store data
+            // --- Process each image file ---
             imageFiles.forEach((file, index) => {
+                const fileName = file.name;
+                const fullResUrl = rawBaseUrl + fileName;
+                const previewUrl = rawBaseUrl + 'previews/' + fileName;
+
                 const imgElement = document.createElement('img');
-                imgElement.src = file.download_url;
-                imgElement.alt = file.name;
-                imgElement.loading = 'lazy'; // Lazy load gallery images
+                imgElement.alt = fileName; // Set alt text immediately
+                imgElement.loading = 'lazy'; // Still lazy load grid images
 
-                // Store data before adding listener
+                // Initial placeholder background (optional)
+                imgElement.style.backgroundColor = 'var(--stone-800)';
+
+                // Store comprehensive data
                 const imageData = {
-                    src: file.download_url,
-                    description: `Getting description for ${file.name}...`, // Placeholder
+                    previewUrl: previewUrl,
+                    fullResUrl: fullResUrl,
+                    description: `Loading description for ${fileName}...`,
                     element: imgElement,
-                    fileName: file.name
+                    fileName: fileName,
+                    hasTriedPreview: false, // Flag to track if preview check completed
+                    hasPreview: false      // Flag indicating if preview was successfully loaded
                 };
-                imagesData.push(imageData);
+                imagesData.push(imageData); // Store data early
 
-                imgElement.addEventListener('click', () => {
-                    currentIndex = index;
-                    openFullscreen(imageData);
-                });
-
+                // Append element to DOM *before* setting src for preview check
                 gallery.appendChild(imgElement);
 
-                // Fetch EXIF data asynchronously for this image
-                fetchExifDescription(imageData);
+                // --- Add click listener (refers to imageData in closure) ---
+                imgElement.addEventListener('click', () => {
+                    // Find the index again based on the element, in case order changes later
+                    const clickedIndex = imagesData.findIndex(item => item.element === imgElement);
+                    if (clickedIndex !== -1) {
+                         currentIndex = clickedIndex;
+                         openFullscreen(imagesData[currentIndex]);
+                    } else {
+                        console.error("Could not find image data for clicked element:", imgElement);
+                    }
+                });
+
+                // --- Asynchronously check for preview and set src ---
+                checkAndLoadPreview(imageData, imgElement);
             });
 
         } catch (error) {
-            console.error('Error fetching images:', error);
-            gallery.innerHTML = `<p>Error loading images: ${error.message}. Check the console!!!</p>`;
+            console.error('Error caught in fetchImages:', error);
+            gallery.innerHTML = `<p>Error loading images: ${error.message}. Check console.</p>`;
         }
     }
 
-    // --- Fetch EXIF Description ---
+    // --- Function to check for preview, load it or fallback, then fetch EXIF ---
+    function checkAndLoadPreview(imageData, imgElement) {
+        const previewTester = new Image(); // Use temporary Image object to test loading
+
+        previewTester.onload = () => {
+            // Preview exists and loaded successfully
+            console.log(`Preview found for ${imageData.fileName}`);
+            imgElement.src = imageData.previewUrl; // Use preview URL for the grid image
+            imageData.hasPreview = true;
+            imageData.hasTriedPreview = true;
+            fetchExifDescription(imageData); // Fetch EXIF (always from full-res)
+        };
+
+        previewTester.onerror = () => {
+            // Preview doesn't exist or failed to load (e.g., 404)
+            console.log(`Preview not found/failed for ${imageData.fileName}, using full resolution.`);
+            imgElement.src = imageData.fullResUrl; // Use full-res URL as fallback for the grid
+            imageData.hasPreview = false;
+            imageData.hasTriedPreview = true;
+            fetchExifDescription(imageData); // Fetch EXIF (always from full-res)
+        };
+
+        // Start loading the preview image (after handlers are set)
+        previewTester.src = imageData.previewUrl;
+    }
+
+
+    // --- Fetch EXIF Description (MODIFIED: uses fullResUrl) ---
     async function fetchExifDescription(imageData) {
+        // Only proceed if preview check is done (prevents race conditions if needed)
+        // Although EXIF fetch is independent, might be good practice if dependent logic existed
+        // if (!imageData.hasTriedPreview) {
+        //     console.log(`Skipping EXIF fetch for ${imageData.fileName} until preview check completes.`);
+        //     return;
+        // }
+
         try {
-            // Fetch the image as a blob to read EXIF
-            const response = await fetch(imageData.src);
+            // ALWAYS fetch EXIF from the full-resolution image
+            const response = await fetch(imageData.fullResUrl);
             if (!response.ok) throw new Error(`Failed to fetch image for EXIF: ${response.status}`);
             const blob = await response.blob();
 
-            // Use exif-js to get EXIF data
             EXIF.getData(blob, function() {
-                const description = EXIF.getTag(this, "image_description");
+                const description = EXIF.getTag(this, "ImageDescription");
                 imageData.description = description || ''; // Store description or empty string
 
-                // If this image is currently displayed fullscreen, update the description
-                if (imagesData[currentIndex] === imageData && fullscreenOverlay.style.display !== 'none') {
-                     imageDescription.textContent = imageData.description;
+                // Update description if this image is currently fullscreen
+                if (currentIndex !== -1 && imagesData[currentIndex] === imageData && fullscreenOverlay.style.display !== 'none') {
+                    imageDescription.textContent = imageData.description;
                 }
             });
         } catch (error) {
-            console.warn(`Could not fetch/read EXIF for ${imageData.fileName}:`, error);
-            imageData.description = ''; // Set description to empty on error
-             if (imagesData[currentIndex] === imageData && fullscreenOverlay.style.display !== 'none') {
-                 imageDescription.textContent = ''; // Clear description on error
-             }
+            console.warn(`Could not fetch/read EXIF for ${imageData.fileName} from ${imageData.fullResUrl}:`, error);
+            imageData.description = ''; // Set empty description on error
+            if (currentIndex !== -1 && imagesData[currentIndex] === imageData && fullscreenOverlay.style.display !== 'none') {
+                imageDescription.textContent = ''; // Clear description on error
+            }
         }
     }
 
 
-    // --- Open Fullscreen ---
+    // --- Open Fullscreen (MODIFIED: uses fullResUrl) ---
     function openFullscreen(imageData) {
-        fullscreenImage.src = imageData.src;
+        // Always display the full-resolution image in fullscreen
+        fullscreenImage.src = imageData.fullResUrl;
         fullscreenImage.alt = imageData.fileName;
-        imageDescription.textContent = imageData.description || 'Loading...'; // Show placeholder or fetched description
-        fullscreenOverlay.style.display = 'flex'; // Use flex to enable centering
-        document.body.classList.add('fullscreen-open'); // Prevent body scroll
+        imageDescription.textContent = imageData.description || 'Loading description...'; // Show placeholder or fetched description
+        fullscreenOverlay.style.display = 'flex';
+        document.body.classList.add('fullscreen-open');
         document.addEventListener('keydown', handleKeydown);
-
-        // Scroll content area to top when opening a new image
         fullscreenContent.scrollTop = 0;
+
+        // Preload next and previous full-res images for smoother navigation (optional)
+        preloadAdjacentImages(currentIndex);
     }
 
-    // --- Close Fullscreen ---
+    // --- Close Fullscreen (no changes needed) ---
     function closeFullscreen() {
         fullscreenOverlay.style.display = 'none';
-        fullscreenImage.src = ''; // Clear src to stop loading potentially large image
+        fullscreenImage.src = '';
         imageDescription.textContent = '';
-        document.body.classList.remove('fullscreen-open'); // Allow body scroll again
+        document.body.classList.remove('fullscreen-open');
         document.removeEventListener('keydown', handleKeydown);
-        currentIndex = -1; // Reset index
+        currentIndex = -1;
     }
 
-    // --- Show Image by Index (for navigation) ---
+    // --- Show Image by Index (MODIFIED: uses fullResUrl) ---
     function showImageAtIndex(index) {
         if (index < 0 || index >= imagesData.length) return; // Bounds check
 
         currentIndex = index;
         const imageData = imagesData[currentIndex];
-        fullscreenImage.src = imageData.src;
+        // Always show full-res in the fullscreen view
+        fullscreenImage.src = imageData.fullResUrl;
         fullscreenImage.alt = imageData.fileName;
-        imageDescription.textContent = imageData.description || ''; // Show already fetched description or empty
+        imageDescription.textContent = imageData.description || ''; // Show fetched description or empty
 
-        // Ensure EXIF data is fetched if it wasn't already (might happen on rapid navigation)
-        if (imageData.description.startsWith('Loading description')) {
-            fetchExifDescription(imageData); // Re-trigger fetch if needed
-        }
+        // Ensure EXIF data is fetched if it somehow wasn't (unlikely with new flow)
+        // if (imageData.description.startsWith('Loading description')) {
+        //     fetchExifDescription(imageData);
+        // }
 
-        // Scroll content area to top when changing image
         fullscreenContent.scrollTop = 0;
+        // Preload next/prev when navigating
+        preloadAdjacentImages(currentIndex);
+    }
+
+    // --- Optional: Preload adjacent full-res images ---
+    function preloadAdjacentImages(index) {
+        const nextIndex = (index + 1) % imagesData.length;
+        const prevIndex = (index - 1 + imagesData.length) % imagesData.length;
+
+        if (nextIndex !== index && imagesData[nextIndex]) {
+            const nextImage = new Image();
+            nextImage.src = imagesData[nextIndex].fullResUrl;
+            // console.log("Preloading next:", imagesData[nextIndex].fileName);
+        }
+        if (prevIndex !== index && imagesData[prevIndex]) {
+            const prevImage = new Image();
+            prevImage.src = imagesData[prevIndex].fullResUrl;
+             // console.log("Preloading prev:", imagesData[prevIndex].fileName);
+        }
     }
 
 
-    // --- Event Handlers ---
+    // --- Event Handlers (no changes needed for keydown, overlay click) ---
     function handleKeydown(event) {
         if (event.key === 'Escape') {
             closeFullscreen();
         } else if (event.key === 'ArrowRight') {
-            const nextIndex = (currentIndex + 1) % imagesData.length; // Wrap around
+            const nextIndex = (currentIndex + 1) % imagesData.length;
             showImageAtIndex(nextIndex);
         } else if (event.key === 'ArrowLeft') {
-            const prevIndex = (currentIndex - 1 + imagesData.length) % imagesData.length; // Wrap around
+            const prevIndex = (currentIndex - 1 + imagesData.length) % imagesData.length;
             showImageAtIndex(prevIndex);
         }
     }
 
-    // Close overlay when clicking outside the content area
     fullscreenOverlay.addEventListener('click', (event) => {
-        // Check if the click is directly on the overlay, not its children
         if (event.target === fullscreenOverlay) {
             closeFullscreen();
         }
