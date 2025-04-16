@@ -5,36 +5,41 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Photos | elouan.xyz</title>
         <link rel="stylesheet" href="/styles/style.css" />
-        <link
+        <link rel="stylesheet" href="/photos/photos.css" />
 
         <script
             data-goatcounter="https://elouan.goatcounter.com/count"
             async
             src="//gc.zgo.at/count.js"
         ></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
     </head>
     <body>
         <div class="gallery-container">
-            <div class="gallery"></div>
+            <div class="gallery">
+                <p>Loading my photos...</p>
+            </div>
         </div>
 
-        <div class="fullscreen-overlay" style="display: none;">
-            <div class="fullscreen-content">
-              <img src="" alt="Fullscreen Image" class="fullscreen-image" />
-              <div class="image-description"></div>
-              <span class="close-button">&times;</span>
+        <div
+            class="fullscreen-overlay"
+            id="fullscreen-overlay"
+            style="display: none;"
+        >
+            <div class="fullscreen-content" id="fullscreen-content">
+                <img
+                    class="fullscreen-image"
+                    id="fullscreen-image"
+                    src=""
+                    alt="Fullscreen Image"
+                />
+                <p class="image-description" id="image-description"></p>
             </div>
-          </div>
-
+        </div>
         <hr />
         <a href="/">Back to elouan.xyz</a>
 
-        <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.min.js"
-      integrity="sha512-3LU42oRiPzv/qA5QTgTF+R97b6iNtsQg0F6Wd+t0gX7u9bYqFCkF8yWv/385Cp17Kn3e1E3xG4W6d6d0mN0Hdg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
         <script src="/scripts/gallery.js"></script>
     </body>
 </html>
