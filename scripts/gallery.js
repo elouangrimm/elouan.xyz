@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Use exif-js to get EXIF data
             EXIF.getData(blob, function() {
-                const description = EXIF.getTag(this, "ImageDescription");
+                const description = EXIF.getTag(this, "image_description");
                 imageData.description = description || ''; // Store description or empty string
 
                 // If this image is currently displayed fullscreen, update the description
