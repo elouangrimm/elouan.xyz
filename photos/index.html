@@ -14,8 +14,22 @@
         ></script>
 
         <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
+        <script src="/scripts/tooltips.js"></script>
     </head>
     <body>
+        <h1>Photos</h1>
+
+        <h3>All taken by Me!</h3>
+        <h4>
+            ...using either a <span class="has-tooltip" data-tooltip="Canon EOS 80D">Cannon DSLR camera</span> from the Oregon Museum of
+            Science and Industry or my cheap $100
+            <a href="https://nuumobile.com/product/a23-plus-android-smartphone/"
+                >Android phone</a
+            >.
+        </h4>
+
+        <hr />
+
         <div class="gallery-container">
             <div class="gallery" id="gallery">
                 <p>Loading my photos...</p>
@@ -40,6 +54,7 @@
         <hr />
         <a href="/">Back to elouan.xyz</a>
 
+        <div id="tooltip-display" class="tooltip" role="tooltip"></div>
         <script src="/scripts/gallery.js"></script>
     </body>
 </html>

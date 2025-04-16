@@ -1,4 +1,5 @@
 :root {
+    /* b&w */
     --stone-050: #fafaf9;
     --stone-100: #f5f5f4;
     --stone-200: #e7e5e4;
@@ -11,7 +12,7 @@
     --stone-900: #1c1917;
     --stone-950: #0c0a09;
 
-    /* shade 500 */
+    /* colors */
     --red: #ef4444;
     --orange: #f97316;
     --amber: #f59e0b;
@@ -84,7 +85,7 @@ a.big {
 }
 
 a {
-    --color: var(--fuchsia);
+    --color: var(--blue);
     color: var(--color);
 
     &:hover {
@@ -109,7 +110,7 @@ label {
 }
 
 button {
-    --color: var(--fuchsia);
+    --color: var(--blue);
     color: var(--color);
 
     &:hover {
@@ -129,66 +130,36 @@ button {
     cursor: pointer;
 }
 
-/* GALLERY */
+/* --- TOOLTIP STYLES --- */
 
-.gallery-container {
-    width: 80%;
-    margin: auto;
-    padding: 20px;
-}
-
-.gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 15px;
-}
-
-.gallery img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    cursor: pointer;
-}
-
-.fullscreen-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
-    z-index: 1000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-.fullscreen-content {
+.has-tooltip {
+    border-bottom: 1px dotted var(--fuchsia);
+    cursor: help;
     position: relative;
-    max-width: 100%;
-    max-height: 100%;
 }
 
-.fullscreen-image {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-}
-
-.image-description {
-    color: white;
-    text-align: center;
-    padding: 10px;
-}
-
-.close-button {
+#tooltip-display {
     position: absolute;
-    top: 20px;
-    right: 20px;
-    font-size: 2em;
-    color: white;
-    cursor: pointer;
-    z-index: 1001;
+    background-color: var(--stone-800);
+    color: var(--stone-100);
+    padding: 5px 10px;
+    font-size: 0.85em;
+    border: 1px solid var(--stone-600);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+
+    z-index: 1010;
+
+    white-space: nowrap;
+    max-width: 250px;
+
+    pointer-events: none;
+}
+
+#tooltip-display.visible {
+    opacity: 1;
+    visibility: visible;
 }

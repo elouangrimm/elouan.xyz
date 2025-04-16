@@ -6,18 +6,26 @@
         <link rel="stylesheet" href="/styles/style.css" />
         <title>Elouan Grimm</title>
 
-        <meta name="description" content="elouan.xyz: Elouan's website.">
-        <meta name="keywords" content="portfolio, personal, website">
-        <meta name="author" content="Elouan Grimm">
-        <meta http-equiv="content-language" content="en-US">
-        <meta property="og:title" content="Elouan Grimm">
-        <meta property="og:description" content="elouan.xyz: Elouan's website.">
-        <meta property="og:image" content="https://www.example.com/images/cool-image.jpg">
-        <meta property="og:url" content="https://elouan.xyz/">
-        <meta property="og:type" content="website">
-        <meta property="og:site_name" content="elouan.xyz">
-        
-        <script data-goatcounter="https://elouan.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+        <meta name="description" content="elouan.xyz: Elouan's website." />
+        <meta name="keywords" content="portfolio, personal, website" />
+        <meta name="author" content="Elouan Grimm" />
+        <meta http-equiv="content-language" content="en-US" />
+        <meta property="og:title" content="Elouan Grimm" />
+        <meta
+            property="og:description"
+            content="elouan.xyz: Elouan's website."
+        />
+        <meta property="og:image" content="/assets/card.png" />
+        <meta property="og:url" content="https://elouan.xyz/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="elouan.xyz" />
+
+        <script
+            data-goatcounter="https://elouan.goatcounter.com/count"
+            async
+            src="//gc.zgo.at/count.js"
+        ></script>
+        <script src="/scripts/tooltips.js"></script>
     </head>
     <body>
         <h1 style="--color: var(--stone-50); text-decoration: none">
@@ -29,21 +37,28 @@
             <span
                 data-roller="a web developer, a software engineer, a nerd, a terminally online person, a vibe coder"
                 >a web developer</span
-            >. I really love <span data-roller="Open Source and Bluesky and Chrome Extensions and
+            >. I really love
+            <span
+                data-roller="Open Source and Bluesky and Chrome Extensions and
             plain HTML5 websites, Bluesky and Open Source and Chrome Extensions and
-            plain HTML5 websites">Open Source and Bluesky and Chrome Extensions and
-            plain HTML5 websites...</span> and the list goes on. I recently moved to
-            Cape Town, am fluent in French and <span data-roller="MERICAN, American, AMERICAN"></span> English, and I enjoy
-            <a href="/photos/" style="--color: var(--green)">photography</a> (with my
-            <span data-roller="crappy, terrible, awful, cheap">crappy</span> phone). Hit me up on Bluesky or by email (I will respond ASAP)!
+            plain HTML5 websites"
+                >Open Source and Bluesky and Chrome Extensions and plain HTML5
+                websites...</span
+            >
+            and the list goes on. I recently moved to Cape Town, am fluent in
+            French and
+            <span data-roller="MERICAN, American, AMERICAN"></span> English, and
+            I enjoy
+            <a href="/photos/" style="--color: var(--green)">photography</a>
+            (with my
+            <span data-roller="crappy, terrible, awful, cheap">crappy</span>
+            phone). Hit me up on Bluesky or by email (I will respond ASAP)!
         </p>
 
         <a class="big" style="--color: var(--fuchsia)" href="/projects/"
             >Projects</a
         >
-        <a class="big" style="--color: var(--green)" href="/photos/"
-            >Photos</a
-        >
+        <a class="big" style="--color: var(--green)" href="/photos/">Photos</a>
 
         <ul>
             <li>
@@ -89,6 +104,17 @@
                 <a href="/feed" style="--color: var(--rss)">RSS</a>
             </li>
         </ul>
+
+        <div id="tooltip-display" class="tooltip" role="tooltip"></div>
         <script src="/scripts/roller.js"></script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                console.log(`
+                    whats up guys ^^
+                    welcome to the D̸͚̤̖̘̿͆̒̎͒̚E̵̬̭̖̼͗̇͌͗͘V̷͈̪̟̾̇̊̐̈́͗ͅ ̵̳̬̞̞̟̀͊̕T̷̥̞̍͑̾̈́̃̃ͅȎ̷̡̹̪̠̳̈́̾̇̚̚Õ̴͕̓̽Ḻ̴̡̬̬͓̐S̶̯͍͊̓͝!!!!!!
+                `)
+            });
+        </script>
     </body>
 </html>
