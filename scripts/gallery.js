@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fullscreenContent.scrollTop = 0;
 
         // Preload next and previous full-res images for smoother navigation (optional)
-        preloadAdjacentImages(currentIndex);
+        // preloadAdjacentImages(currentIndex);
     }
 
     // --- Close Fullscreen (no changes needed) ---
@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         fullscreenContent.scrollTop = 0;
         // Preload next/prev when navigating
-        preloadAdjacentImages(currentIndex);
+        // preloadAdjacentImages(currentIndex);
     }
 
     // --- Optional: Preload adjacent full-res images ---
