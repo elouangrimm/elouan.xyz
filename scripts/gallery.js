@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const repoOwner = 'elouangrimm';
     const repoName = 'photos';
+    const branch = 'main';
     const repoRootUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/`;
     const rawBaseUrl = `https://raw.githubusercontent.com/${repoOwner}/${repoName}/${branch}/`;
 
