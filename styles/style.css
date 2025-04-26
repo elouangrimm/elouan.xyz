@@ -132,7 +132,10 @@ button {
 }
 
 .search {
-    color: var(--stone-100);
+    width: 200px;
+    height: 25px;
+    font-size: 20px;
+    color: var(--stone-50);
 
     background-color: var(--stone-800);
     color: var(--stone-050);
