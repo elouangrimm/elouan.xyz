@@ -39,6 +39,7 @@
     --rss: var(--orange);
     --reddit: #FF4500;
     --signal: #3A76F0;
+    --default-highlight: var(--fuchsia);
 
     --font-mono: 'JetBrains Mono', 'SF Mono', 'Roboto Mono', 'Cascadia Code', monospace;
 }
@@ -128,6 +129,14 @@ button {
     color: var(--stone-050);
     border: none;
     cursor: pointer;
+}
+
+.search {
+    color: var(--stone-100);
+
+    background-color: var(--stone-800);
+    color: var(--stone-050);
+    border: none;
 }
 
 /* --- TOOLTIP STYLES --- */
