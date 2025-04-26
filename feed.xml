@@ -10,5 +10,12 @@
             <description>My first RSS post!</description>
             <pubDate>Tue, 15 Apr 2025 00:19:45 GMT</pubDate>
         </item>
+        <item>
+            <title>Added many photos!</title>
+            <link>https://elouan.xyz/photos</link>
+            <guid>https://elouan.xyz/photos</guid>
+            <description>Check the link to see some pics I took.</description>
+            <pubDate>Sat, 26 Apr 2025 00:06:23 GMT</pubDate>
+        </item>
     </channel>
 </rss>
