@@ -1,0 +1,37 @@
+[
+    {
+      "title": "CodePond",
+      "description": "A simple code-to-image app that works with the pondiverse.",
+      "imageUrl": "/images/codepond.png",
+      "linkUrl": "https://codepond.elouan.xyz/",
+      "tags": "tool, renderer, pondiverse, JS, HTML"
+    },
+    {
+      "title": "MinimalNewTab",
+      "description": "An extremely minimal New Tab Page, that just creates a solid color page from a color picker!",
+      "imageUrl": "/images/minimalnewtab.png",
+      "linkUrl": "https://chromewebstore.google.com/detail/minimal-new-tab/afnmoecpnepccekbinlapeolhgdgjclm",
+      "tags": "Chrome Extension, HTML, JS"
+    },
+    {
+      "title": "Project Prometheus",
+      "description": "Explore a long-abandoned facility, originally the international government energy project known as Project Prometheus. I worked on this game with Epimetheus Games.",
+      "imageUrl": "/images/projectprometheus.png",
+      "linkUrl": "https://github.com/EpimetheusGames/ProjectPrometheus",
+      "tags": "Game, Godot, itch.io"
+    },
+    {
+      "title": "Pondiverse",
+      "description": "The pondiverse is a network for sharing and exploring creations across many places!",
+      "imageUrl": "/images/pondiverse.png",
+      "linkUrl": "https://www.pondiverse.com/",
+      "tags": "Social Network, HTML, JS, Cool"
+    },
+    {
+      "title": "Project Without Tags",
+      "description": "This one might not have specific tags assigned.",
+      "imageUrl": "/images/projects/placeholder5.webp",
+      "linkUrl": "https://example.com/link-to-project-5",
+      "tags": "" 
+    }
+  ]
