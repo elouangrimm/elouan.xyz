@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const projectsGrid = document.getElementById('projects-grid');
-    const projectsDataUrl = './projects/projects.json'; // Path to your JSON file
+    const projectsDataUrl = '../projects/projects.json'; // Path to your JSON file
 
     async function loadProjects() {
         try {
