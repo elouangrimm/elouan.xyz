@@ -175,3 +175,8 @@ button {
     opacity: 1;
     visibility: visible;
 }
+
+#github-profile-commit-status a {
+    --color: var(--github);
+    font-weight: bold;
+}
