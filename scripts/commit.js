@@ -81,15 +81,14 @@ async function fetchLatestProfileCommitInfo() {
 
             // Add a class "commit-tooltip-trigger" and data attribute for the message
             commitStatusElement.innerHTML = `
-                    Last push: ${relativeTime}
+                    Last commit ${relativeTime}
                     (<a href="${commitUrl}"
                         target="_blank"
                         rel="noopener noreferrer"
                         class="commit-tooltip-trigger"
                         data-commit-message="${escapeHtml(
                             commitMessage.split("\n")[0]
-                        )}"
-                        title="View commit on GitHub">
+                        )}">
                         ${shortSha}
                     </a> to ${repoName.split("/")[1]})
                 `;
