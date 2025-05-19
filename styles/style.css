@@ -39,6 +39,7 @@
     --rss: var(--orange);
     --reddit: #FF4500;
     --signal: #3A76F0;
+    --discord: #3242ED;
     --default-highlight: var(--fuchsia);
 
     --font-mono: 'JetBrains Mono', 'SF Mono', 'Roboto Mono', 'Cascadia Code', monospace;
