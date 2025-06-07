@@ -126,6 +126,7 @@ button {
         text-decoration: none;
     }
 
+    outline: 2px solid var(--stone-800);
     background-color: var(--stone-800);
     color: var(--stone-050);
     border: none;
@@ -142,8 +143,6 @@ button {
     color: var(--stone-050);
     border: none;
 }
-
-/* --- TOOLTIP STYLES --- */
 
 .has-tooltip {
     border-bottom: 1px dotted var(--fuchsia);
