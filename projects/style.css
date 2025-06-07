@@ -1,105 +1,144 @@
+/* --- PROJECTS PAGE STYLES (NEW OVERLAY VERSION) --- */
+
 .projects-container {
     margin: 2em auto;
-    /* Give it some vertical space */
 }
 
 .projects-grid {
     display: grid;
-    /* Adjust minmax for desired minimum card width */
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
-    /* Adjust gap as needed */
+    /* This grid setup should be identical to your .gallery style */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+    /* Use the same gap as your photo gallery */
 }
 
+/* The project card is now a link acting as a container */
 .project-card {
+    position: relative;
+    /* Anchor for the absolute overlay */
     display: block;
-    /* Make the whole card a clickable block */
-    text-decoration: none;
-    /* Remove underline from link */
-    background-color: var(--stone-900);
-    border-radius: 6px;
     overflow: hidden;
-    /* Ensure image corners are rounded */
-    border: 1px solid var(--stone-700);
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    color: inherit;
-    /* Inherit text color from body */
+    /* Keeps everything inside the rounded corners */
+    border-radius: 6px;
+    /* A subtle rounding */
+    aspect-ratio: 4 / 3;
+    /* Give cards a consistent shape */
+    background-color: var(--stone-800);
+    /* BG for loading/missing images */
 }
 
-.project-card:hover,
-.project-card:focus {
-    transform: translateY(-5px) scale(1.01);
-    /* Lift effect */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-    outline: 2px solid var(--fuchsia);
-    /* Focus indicator */
-    border-color: var(--stone-600);
-}
-
+/* The project image now fills the entire card */
 .project-image {
     width: 100%;
-    height: 180px;
-    /* Fixed height for cover images */
+    height: 100%;
     object-fit: cover;
-    /* Scale and crop images nicely */
+    /* Crucial for consistent tiling */
     display: block;
-    /* Remove extra space below image */
-    background-color: var(--stone-800);
-    /* Placeholder bg */
-    border-bottom: 1px solid var(--stone-700);
-    /* Separator */
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    /* Smooth zoom */
 }
 
-.project-content {
-    padding: 15px;
+/* Zoom the image slightly on hover for a dynamic effect */
+.project-card:hover .project-image,
+.project-card:focus .project-image {
+    transform: scale(1.05);
+}
+
+/* The overlay that contains all the text content */
+.project-overlay {
+    position: absolute;
+    inset: 0;
+    /* Cover the entire card (top, right, bottom, left) */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    /* Push content to the bottom */
+    padding: 1rem;
+
+    /* Start with a subtle gradient to make text legible even without full hover */
+    background: linear-gradient(180deg, transparent 60%, rgba(12, 10, 9, 0.85) 100%);
+    opacity: 0;
+    /* Start invisible */
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* On hover/focus, fade in the overlay */
+.project-card:hover .project-overlay,
+.project-card:focus .project-overlay {
+    opacity: 1;
+    /* Make the background darker on hover to ensure all text is readable */
+    background: linear-gradient(180deg, transparent 20%, rgba(12, 10, 9, 0.95) 100%);
+}
+
+/* Style the text elements within the overlay */
+.project-title,
+.project-description,
+.project-tags-container {
+    /* Slide-in-from-bottom effect */
+    transform: translateY(10px);
+    opacity: 0;
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+/* When the card is hovered, reveal the text elements */
+.project-card:hover .project-title,
+.project-card:hover .project-description,
+.project-card:hover .project-tags-container,
+.project-card:focus .project-title,
+.project-card:focus .project-description,
+.project-card:focus .project-tags-container {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Stagger the transition for a nicer effect */
+.project-card:hover .project-description,
+.project-card:focus .project-description {
+    transition-delay: 0.05s;
+}
+
+.project-card:hover .project-tags-container,
+.project-card:focus .project-tags-container {
+    transition-delay: 0.1s;
 }
 
 .project-title {
     font-family: var(--font-mono);
-    font-size: 1.2em;
-    font-weight: bold;
+    font-size: 1.25rem;
     color: var(--stone-100);
-    margin-top: 0;
-    margin-bottom: 0.5em;
-    line-height: 1.3;
+    margin: 0 0 0.25em 0;
+    line-height: 1.2;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+    /* Ensure readability */
 }
 
 .project-description {
-    font-size: 0.95em;
+    font-size: 0.9rem;
     color: var(--stone-300);
     line-height: 1.5;
-    margin-bottom: 0;
-    /* Remove default paragraph margin */
+    margin: 0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
 }
 
 .project-tags-container {
-    margin-top: 12px;
-    /* Space above the tags */
+    margin-top: 10px;
     display: flex;
-    /* Arrange tags in a row */
     flex-wrap: wrap;
-    /* Allow tags to wrap to the next line */
+    /* 'gap' is the modern way to add space between flex items */
     gap: 6px;
-    /* Space between tags */
 }
 
 .project-tag {
+    /* These are spans, not links, as requested */
     display: inline-block;
-    /* Treat as a block but flow inline */
-    background-color: var(--stone-700);
-    /* Subtle background */
-    color: var(--stone-200);
-    /* Slightly lighter text */
+    background-color: rgba(87, 83, 78, 0.8);
+    /* Stone-600 with transparency */
+    color: var(--stone-100);
     padding: 3px 8px;
-    /* Small padding */
     border-radius: 4px;
-    /* Rounded corners */
-    font-size: 0.8em;
-    /* Smaller font */
-    line-height: 1.4;
-    /* Adjust line height if needed */
-    border: 1px solid var(--stone-600);
-    /* Subtle border */
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: 1px solid rgba(120, 113, 108, 0.5);
+    /* Stone-500 with transparency */
     white-space: nowrap;
-    /* Prevent tags from breaking mid-word */
 }
