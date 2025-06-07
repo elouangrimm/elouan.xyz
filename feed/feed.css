@@ -1,0 +1,54 @@
+h4 .danger {
+    display: inline;
+    font-weight: normal;
+    color: var(--red);
+}
+
+.field {
+    display: flex;
+    flex-direction: row;
+    gap: 7px;
+    align-items: center;
+}
+
+#items {
+    display: flex;
+    flex-direction: column;
+    gap: 19px;
+    margin-bottom: 19px;
+}
+
+#feed {
+    margin-top: 19px;
+    resize: vertical;
+    height: 200px;
+    white-space: pre;
+    tab-size: 4;
+}
+
+.title-input-row {
+    display: flex;
+    flex-direction: row;
+    /* gap: 7px; */
+    align-items: center;
+}
+
+.delete-button {
+    flex-shrink: 0;
+}
+
+.pub-date {
+    color: #9faeee;
+}
+
+.desktop {
+    display: none;
+}
+
+.mobile {
+    display: inline;
+}
+
+.tablet {
+    display: inline;
+}
