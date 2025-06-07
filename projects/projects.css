@@ -7,7 +7,7 @@
 /* --- MASONRY LAYOUT USING CSS COLUMNS --- */
 .projects-grid {
     /* Define the number of columns you want */
-    column-count: 3;
+    column-count: 2;
     /* e.g., 3 columns on larger screens */
     column-gap: 15px;
     /* The space between columns */
