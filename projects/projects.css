@@ -1,86 +1,94 @@
-/* --- PROJECTS PAGE STYLES (NEW OVERLAY VERSION) --- */
+/* --- PROJECTS PAGE STYLES (MASONRY/WATERFALL VERSION) --- */
 
 .projects-container {
     margin: 2em auto;
 }
 
+/* --- MASONRY LAYOUT USING CSS COLUMNS --- */
 .projects-grid {
-    display: grid;
-    /* This grid setup should be identical to your .gallery style */
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 15px;
-    /* Use the same gap as your photo gallery */
+    /* Define the number of columns you want */
+    column-count: 3;
+    /* e.g., 3 columns on larger screens */
+    column-gap: 15px;
+    /* The space between columns */
 }
 
-/* The project card is now a link acting as a container */
+/* Make the column count responsive */
+@media (max-width: 1024px) {
+    .projects-grid {
+        column-count: 2;
+    }
+}
+
+@media (max-width: 640px) {
+    .projects-grid {
+        column-count: 1;
+    }
+}
+
+
+/* --- ADJUSTED CARD AND IMAGE STYLES --- */
 .project-card {
     position: relative;
-    /* Anchor for the absolute overlay */
     display: block;
+    /* Important for columns */
     overflow: hidden;
-    /* Keeps everything inside the rounded corners */
-    border-radius: 6px;
-    /* A subtle rounding */
-    aspect-ratio: 4 / 3;
-    /* Give cards a consistent shape */
     background-color: var(--stone-800);
-    /* BG for loading/missing images */
+
+    /* --- CRUCIAL CHANGES FOR MASONRY --- */
+    margin-bottom: 15px;
+    /* This becomes the space between rows */
+    break-inside: avoid-column;
+    /* Prevents a card from breaking across columns */
+    /* REMOVED: aspect-ratio, we want the image to define the height */
 }
 
-/* The project image now fills the entire card */
 .project-image {
     width: 100%;
-    height: 100%;
+    /* Image will always fit the column width */
+    height: auto;
+    /* THIS IS KEY: height adjusts to maintain aspect ratio */
     object-fit: cover;
-    /* Crucial for consistent tiling */
+    /* Still useful for placeholder/loading state */
     display: block;
     transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    /* Smooth zoom */
 }
 
-/* Zoom the image slightly on hover for a dynamic effect */
+
+/* --- OVERLAY AND TEXT STYLES (can remain mostly the same) --- */
 .project-card:hover .project-image,
 .project-card:focus .project-image {
     transform: scale(1.05);
 }
 
-/* The overlay that contains all the text content */
 .project-overlay {
     position: absolute;
     inset: 0;
-    /* Cover the entire card (top, right, bottom, left) */
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    /* Push content to the bottom */
     padding: 1rem;
-
-    /* Start with a subtle gradient to make text legible even without full hover */
     background: linear-gradient(180deg, transparent 60%, rgba(12, 10, 9, 0.85) 100%);
     opacity: 0;
-    /* Start invisible */
     transition: opacity 0.3s ease-in-out;
 }
 
-/* On hover/focus, fade in the overlay */
 .project-card:hover .project-overlay,
 .project-card:focus .project-overlay {
     opacity: 1;
-    /* Make the background darker on hover to ensure all text is readable */
     background: linear-gradient(180deg, transparent 20%, rgba(12, 10, 9, 0.95) 100%);
 }
 
-/* Style the text elements within the overlay */
+/* Text styles (.project-title, .project-description, .project-tags-container, .project-tag) */
+/* can remain exactly as they were in the previous version. */
 .project-title,
 .project-description,
 .project-tags-container {
-    /* Slide-in-from-bottom effect */
     transform: translateY(10px);
     opacity: 0;
     transition: opacity 0.3s ease-out, transform 0.3s ease-out;
 }
 
-/* When the card is hovered, reveal the text elements */
 .project-card:hover .project-title,
 .project-card:hover .project-description,
 .project-card:hover .project-tags-container,
@@ -91,14 +99,11 @@
     opacity: 1;
 }
 
-/* Stagger the transition for a nicer effect */
-.project-card:hover .project-description,
-.project-card:focus .project-description {
+.project-card:hover .project-description, .project-card:focus .project-description {
     transition-delay: 0.05s;
 }
 
-.project-card:hover .project-tags-container,
-.project-card:focus .project-tags-container {
+.project-card:hover .project-tags-container, .project-card:focus .project-tags-container {
     transition-delay: 0.1s;
 }
 
@@ -109,7 +114,6 @@
     margin: 0 0 0.25em 0;
     line-height: 1.2;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
-    /* Ensure readability */
 }
 
 .project-description {
@@ -124,21 +128,16 @@
     margin-top: 10px;
     display: flex;
     flex-wrap: wrap;
-    /* 'gap' is the modern way to add space between flex items */
     gap: 6px;
 }
 
 .project-tag {
-    /* These are spans, not links, as requested */
     display: inline-block;
     background-color: rgba(87, 83, 78, 0.8);
-    /* Stone-600 with transparency */
     color: var(--stone-100);
     padding: 3px 8px;
-    border-radius: 4px;
     font-size: 0.75rem;
     font-weight: 500;
     border: 1px solid rgba(120, 113, 108, 0.5);
-    /* Stone-500 with transparency */
     white-space: nowrap;
 }
