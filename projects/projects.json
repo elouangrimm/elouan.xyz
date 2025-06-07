@@ -1,37 +1,37 @@
 [
     {
-      "title": "CodePond",
-      "description": "A simple code-to-image app that works with the pondiverse.",
-      "imageUrl": "../projects/images/codepond.png",
-      "linkUrl": "https://codepond.elouan.xyz/",
-      "tags": "tool, renderer, pondiverse, JS, HTML"
+        "title": "SaneGames",
+        "description": "A better client for all CrazyGames games, with no ads or annoying UI.",
+        "imageUrl": "../projects/images/sanegames.png",
+        "linkUrl": "https://sanegames.elouan.xyz/",
+        "tags": "games, tools, wrapper, patches, JS"
+    },
+        {
+        "title": "movies.elouan.xyz",
+        "description": "A very simple website to watch any movies or shows, for free! (just a redirector, don't worry)",
+        "imageUrl": "../projects/images/movies.png",
+        "linkUrl": "https://movies.elouan.xyz/",
+        "tags": "app, movies, HTML, JS, piracy"
     },
     {
-      "title": "MinimalNewTab",
-      "description": "An extremely minimal New Tab Page, that just creates a solid color page from a color picker!",
-      "imageUrl": "../projects/images/minimalnewtab.png",
-      "linkUrl": "https://chromewebstore.google.com/detail/minimal-new-tab/afnmoecpnepccekbinlapeolhgdgjclm",
-      "tags": "Chrome Extension, HTML, JS"
+        "title": "MinimalNewTab",
+        "description": "An extremely minimal New Tab Page, that just creates a solid color page from a color picker!",
+        "imageUrl": "../projects/images/minimalnewtab.png",
+        "linkUrl": "https://chromewebstore.google.com/detail/minimal-new-tab/afnmoecpnepccekbinlapeolhgdgjclm",
+        "tags": "Chrome Extension, HTML, JS"
     },
     {
-      "title": "Project Prometheus",
-      "description": "Explore a long-abandoned facility, originally the international government energy project known as Project Prometheus. I worked on this game with Epimetheus Games.",
-      "imageUrl": "../projects/images/projectprometheus.png",
-      "linkUrl": "https://github.com/EpimetheusGames/ProjectPrometheus",
-      "tags": "Game, Godot, itch.io"
+        "title": "Project Prometheus",
+        "description": "Explore a long-abandoned facility, originally the international government energy project known as Project Prometheus. I worked on this game with Epimetheus Games.",
+        "imageUrl": "../projects/images/projectprometheus.png",
+        "linkUrl": "https://github.com/EpimetheusGames/ProjectPrometheus",
+        "tags": "Game, Godot, itch.io"
     },
-    {
-      "title": "Pondiverse",
-      "description": "The pondiverse is a network for sharing and exploring creations across many places!",
-      "imageUrl": "../projects/images/pondiverse.png",
-      "linkUrl": "https://www.pondiverse.com/",
-      "tags": "Social Network, HTML, JS, Cool"
-    },
-    {
-      "title": "Project Without Tags",
-      "description": "This one might not have specific tags assigned.",
-      "imageUrl": "../projects/images/projects/placeholder5.webp",
-      "linkUrl": "https://example.com/link-to-project-5",
-      "tags": "" 
+        {
+        "title": "CodePond",
+        "description": "A simple code-to-image app that works with the pondiverse.",
+        "imageUrl": "../projects/images/codepond.png",
+        "linkUrl": "https://codepond.elouan.xyz/",
+        "tags": "tool, renderer, pondiverse, JS, HTML"
     }
-  ]
+]
