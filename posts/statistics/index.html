@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>STATISTICS STATISTICS STATISTICS // elouan.xyz</title>
+    <link rel="stylesheet" href="/styles/style.css" />
+
+    <script>
+        !function (e, t) { var s, r, o, i; t.__SV || (window.posthog = t, t._i = [], t.init = function (n, a, p) { function g(e, t) { var s = t.split("."); 2 == s.length && (e = e[s[0]], t = s[1]), e[t] = function () { e.push([t].concat(Array.prototype.slice.call(arguments, 0))) } } (o = e.createElement("script")).type = "text/javascript", o.crossOrigin = "anonymous", o.async = !0, o.src = a.api_host.replace(".i.posthog.com", "-assets.i.posthog.com") + "/static/array.js", (i = e.getElementsByTagName("script")[0]).parentNode.insertBefore(o, i); var c = t; for (void 0 !== p ? c = t[p] = [] : p = "posthog", c.people = c.people || [], c.toString = function (e) { var t = "posthog"; return "posthog" !== p && (t += "." + p), e || (t += " (stub)"), t }, c.people.toString = function () { return c.toString(1) + ".people (stub)" }, s = "init bs ws ge fs capture De Ai $s register register_once register_for_session unregister unregister_for_session Is getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty xs Ss createPersonProfile Es gs opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing ys debug ks getPageViewId captureTraceFeedback captureTraceMetric".split(" "), r = 0; r < s.length; r++)g(c, s[r]); t._i.push([n, a, p]) }, t.__SV = 1) }(document, window.posthog || []),
+            posthog.init("phc_W4DPbbp1Qbz4lPVtWrFF54GFUabBHpKzNJx9U6fryBZ", {
+                api_host: "https://posthog.elouan.xyz/ingest",
+                ui_host: "https://us.posthog.com",
+                person_profiles: "always",
+            });
+    </script>
+</head>
+
+<body>
+    <h1 class="heading"><a href="/">elouan.xyz</a> // <a href="https://elouan.xyz/feed">Feed</a> // STATISTICS
+        STATISTICS STATISTICS</h1>
+    <p><i>June 8, 2025</i></p>
+
+    <content>
+        <h3>Stats are cool.</h3>
+        Like <i>really</i> cool.
+        Even when the sample size is small, being able to just gaze at <span class="has-hidden-tooltip" data-tooltip="yes, I can't spell.">gobsmackingly</span> detailed graphs and tables just excites me!
+
+        On all of my websites, I put PostHog tracking codes so I can get this data. Yes, I know that that's a bit of an invasion of privacy, but I'm not doing anything with it other than looking at it.
+        All of these marvelous stats are <a href="https://us.posthog.com/shared/kd29eTs9aiuGE0LUCbh02v1xxVGdKQ">PUBLIC</a>!!!
+
+        For example, as you are reading this, all of my websites combined have gotten a magnificent <b><span id="view-count" class="view-count-loading">billion</span></b> views!
+
+        <br>
+
+        <p>go back to the <a href="/">homepage</a>???</p>
+    </content>
+
+    <div id="tooltip-display" class="tooltip" role="tooltip"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const viewCountElement = document.getElementById('view-count');
+
+            if (viewCountElement) {
+                fetch('/api/get-views')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        const formattedCount = new Intl.NumberFormat().format(data.count);
+                        viewCountElement.textContent = formattedCount;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching view count:', error);
+                        viewCountElement.textContent = 'billion';
+                    });
+            }
+        });
+    </script>
+
+</body>
+
+</html>
