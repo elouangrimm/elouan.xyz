@@ -19,8 +19,8 @@ h4 .danger {
 }
 
 .item-container {
+    padding: 5px;
     background-color: var(--stone-900);
-
 }
 
 #feed {
