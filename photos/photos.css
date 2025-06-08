@@ -18,6 +18,8 @@
     display: block;
     background-color: var(--stone-800);
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    color: transparent; 
+    text-indent: -10000px; 
 }
 
 .gallery img:hover {

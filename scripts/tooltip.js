@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const tooltipDisplay = document.getElementById("tooltip-display");
-    const tooltipTargets = document.querySelectorAll(".has-tooltip") && document.querySelectorAll(".has-hidden-tooltip");
+    const tooltipTargets = document.querySelectorAll(".has-tooltip, .has-hidden-tooltip");
 
     if (!tooltipDisplay) {
         console.warn("Tooltip display element (#tooltip-display) not found.");
