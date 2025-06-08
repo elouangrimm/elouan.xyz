@@ -96,6 +96,10 @@ a {
     --color: var(--blue);
     color: var(--color);
 
+    &.heading {
+        text-decoration: none;
+    }
+
     &:hover {
         background-color: var(--color);
         color: var(--stone-950);
