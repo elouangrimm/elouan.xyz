@@ -24,5 +24,12 @@
             <description>I have completed the projects gallery, go check it out!</description>
             <pubDate>Sat, 07 Jun 2025 00:18:45 GMT</pubDate>
         </item>
+        <item>
+            <title>STATISTICS STATISTICS STATISTICS</title>
+            <link>https://elouan.xyz/posts/statistics</link>
+            <guid>https://elouan.xyz/posts/statistics</guid>
+            <description>Stats are cool. Like, REALLY cool.</description>
+            <pubDate>Sat, 08 Jun 2025 00:16:45 GMT</pubDate>
+        </item>
     </channel>
 </rss>
