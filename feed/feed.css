@@ -19,6 +19,11 @@ h4 .danger {
     margin-bottom: 19px;
 }
 
+.item-container {
+    background-color: var(--stone-950);
+
+}
+
 #feed {
     margin-top: 19px;
     resize: vertical;

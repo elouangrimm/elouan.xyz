@@ -22,7 +22,6 @@ let currentItems = [];
 
 function getLocalFeed() {
     const feed = localStorage.getItem("feed");
-    // console.log(feed);
     if (feed) return JSON.parse(feed);
 }
 
