@@ -136,7 +136,7 @@ button {
 .search {
     width: 200px;
     height: 25px;
-    font-size: 20px;
+    font-size: 18px;
     color: var(--stone-50);
 
     background-color: var(--stone-800);
