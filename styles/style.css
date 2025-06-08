@@ -63,6 +63,12 @@ h3 {
     line-height: 1.2;
 }
 
+.heading {
+    font-family: var(--font-mono);
+    line-height: 1.2;
+    text-decoration: none;
+}
+
 ul {
     padding-inline-start: 1em;
 
