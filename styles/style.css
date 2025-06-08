@@ -195,6 +195,24 @@ button {
     font-weight: bold;
 }
 
-content img {
-    
+content figure {
+    margin: 2em 0; 
+}
+
+content figure img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border: 1px solid var(--stone-100);
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+content figcaption {
+    padding: 0.75em 0.25em;
+    text-align: center;
+    font-size: 0.9em;
+    color: var(--stone-400);
+    line-height: 1.4;
 }
