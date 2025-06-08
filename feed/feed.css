@@ -13,14 +13,13 @@ h4 .danger {
 
 #items {
     display: flex;
-    background-color: var(--stone-950);
     flex-direction: column;
     gap: 19px;
     margin-bottom: 19px;
 }
 
 .item-container {
-    background-color: var(--stone-950);
+    background-color: var(--stone-900);
 
 }
 
