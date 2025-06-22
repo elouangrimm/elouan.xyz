@@ -18,7 +18,7 @@
     --amber: #f59e0b;
     --yellow: #eab308;
     --lime: #84cc16;
-    --elouan-green: #7DB84F;
+    --elouan-green: #7db84f;
     --green: #22c55e;
     --emerald: #10b981;
     --teal: #14b8a6;
@@ -37,12 +37,19 @@
     --bluesky: #048bff;
     --email: var(--violet);
     --rss: var(--orange);
-    --reddit: #FF4500;
-    --signal: #3A76F0;
-    --discord: #3242ED;
+    --reddit: #ff4500;
+    --signal: #3a76f0;
+    --discord: #3242ed;
     --default-highlight: var(--fuchsia);
 
-    --font-mono: 'JetBrains Mono', 'SF Mono', 'Roboto Mono', 'Cascadia Code', monospace;
+    --font-mono: 'JetBrains Mono', 'SF Mono', 'Roboto Mono', 'Cascadia Code',
+        monospace;
+}
+
+/* global styles */
+*::selection {
+    background-color: var(--indigo);
+    color: var(--stone-600);
 }
 
 body {
@@ -56,21 +63,12 @@ body {
     line-height: 1.6;
 }
 
+/* typography */
 h1,
 h2,
 h3 {
     font-family: var(--font-mono);
     line-height: 1.2;
-}
-
-.heading {
-    font-family: var(--font-mono);
-    line-height: 1.2;
-    text-decoration: none;
-}
-
-.heading a {
-    text-decoration: none;
 }
 
 ul {
@@ -81,21 +79,7 @@ ul {
     }
 }
 
-*::selection {
-    background-color: var(--indigo);
-    color: var(--stone-600);
-}
-
-a.big {
-    padding: 0.1em;
-    font-weight: bold;
-    margin: 0 0.2em;
-
-    &:first-of-type {
-        margin-left: 0;
-    }
-}
-
+/* links */
 a {
     --color: var(--blue);
     color: var(--color);
@@ -108,6 +92,8 @@ a {
         background-color: var(--color);
         color: var(--stone-950);
         outline: 2px solid var(--color);
+        text-decoration: wavy underline;
+        text-underline-offset: 0.2em;
     }
 
     &:focus {
@@ -116,6 +102,22 @@ a {
     }
 }
 
+a.big {
+    padding: 0.1em;
+    font-weight: bold;
+    margin: 0 0.2em;
+
+    &:first-of-type {
+        margin-left: 0;
+    }
+}
+
+#github-profile-commit-status a {
+    --color: var(--github);
+    font-weight: bold;
+}
+
+/* buttons and forms */
 label {
     display: block;
     padding: 0.3em 0;
@@ -158,6 +160,18 @@ button {
     border: none;
 }
 
+/* headings and specific elements */
+.heading {
+    font-family: var(--font-mono);
+    line-height: 1.2;
+    text-decoration: none;
+}
+
+.heading a {
+    text-decoration: none;
+}
+
+/* tooltips */
 .has-tooltip {
     border-bottom: 1px dotted var(--fuchsia);
     cursor: help;
@@ -190,13 +204,9 @@ button {
     visibility: visible;
 }
 
-#github-profile-commit-status a {
-    --color: var(--github);
-    font-weight: bold;
-}
-
+/* content specific styles */
 content figure {
-    margin: 2em 0; 
+    margin: 2em 0;
 }
 
 content figure img {
