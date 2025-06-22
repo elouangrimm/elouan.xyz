@@ -92,8 +92,6 @@ a {
         background-color: var(--color);
         color: var(--stone-950);
         outline: 2px solid var(--color);
-        text-decoration: wavy underline;
-        text-underline-offset: 0.2em;
     }
 
     &:focus {
