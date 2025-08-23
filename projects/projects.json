@@ -14,8 +14,8 @@
         "tags": "app, movies, HTML, JS, piracy"
     },
     {
-        "title": "MinimalNewTab",
-        "description": "An extremely minimal New Tab Page, that just creates a solid color page from a color picker!",
+        "title": "Minimal New Tab",
+        "description": "Blank new tab with a custom solid background color and optional pinned Home tab.",
         "imageUrl": "../projects/images/minimalnewtab.png",
         "linkUrl": "https://chromewebstore.google.com/detail/minimal-new-tab/afnmoecpnepccekbinlapeolhgdgjclm",
         "tags": "Chrome Extension, HTML, JS"
