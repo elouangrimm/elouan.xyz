@@ -20,33 +20,40 @@
 </head>
 
 <body>
-	<header>
-	    <h1 class="heading translate" data-fr="elouan.xyz // Flux"><a href="/">elouan.xyz</a> // Feed</h1>
-	</header>
+  <link rel="alternate" type="application/rss+xml" title="elouan.xyz" href="https://elouan.xyz/feed.xml" />
 
-	<main>
-	    <link rel="alternate" type="application/rss+xml" title="elouan.xyz" href="https://elouan.xyz/feed.xml" />
-	    <h4 class="translate" data-fr="mon flux ^^ (je poste rarement)">my feed ^^ (wont post often)</h4>
-	    <a id="rss_global" href="https://elouan.xyz/feed.xml" class="translate" data-fr="https://elouan.xyz/feed.xml">https://elouan.xyz/feed.xml</a>
-	    <button class="translate" data-fr="Copier le lien du flux" style="margin: 0 0.5em 0.7em" onclick="copyLink('a#rss_global')">Copy Feed Link</button>
-	    <hr>
-	    <noscript>I use jumpyscript to load the feed, so youre gonna need to enable javascript!</noscript>
-	    <header style="margin-top: 19px">
-	        <input type="search" id="search" class="search" placeholder="Search..." />
-	    </header>
-	    <main id="items"></main>
-	    <template id="item-template">
-	        <section class="item-container">
+  <h1 class="heading"><a href="/">elouan.xyz</a> // Feed</h1>
+
+  <h4 style="margin-bottom: 0.3em">
+    my feed ^^ (wont post often)
+  </h4>
+  <a id="rss_global" href="https://elouan.xyz/feed.xml">https://elouan.xyz/feed.xml</a><button
+    style="margin: 0 0.5em 0.7em" onclick="copyLink('a#rss_global')">
+    Copy Feed Link
+  </button>
+
+  <hr>
+
+  <noscript>I use jumpyscript to load the feed, so youre gonna need to enable javascript!</noscript>
+
+  <header style="margin-top: 19px">
+    <input type="search" id="search" class="search" placeholder="Search..." />
+  </header>
+
+  <main id="items"></main>
+
+  <template id="item-template">
+    <section class="item-container">
       <h2 class="title">Title</h2>
       <p class="pub-date">Date</p>
       <p class="description">Description</p>
       <a class="link" href="#">Link</a>
     </section>
     <br>
-	    </template>
-	</main>
-	<script>
-	    const copyLink = (selector) => {
+  </template>
+
+  <script>
+    const copyLink = (selector) => {
       const element = document.querySelector(selector);
       const text = element.href;
       if (!text) {
@@ -61,9 +68,9 @@
 
       navigator.clipboard.writeText(text);
     };
-	</script>
-	<script src="../scripts/feed.js"></script>
-	<script src="/scripts/tooltip.js"></script>
-	<script src="/scripts/auto-translate.js"></script>
+  </script>
+
+  <script src="../scripts/feed.js"></script>
 </body>
+
 </html>
