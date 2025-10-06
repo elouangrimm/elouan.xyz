@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 element.innerHTML = manualTranslation;
             } else {
                 const originalHTML = element.innerHTML;
-                // Call LibreTranslate API to auto translate the content to french
+                // Call LibreTranslate API to auto translate the content
                 fetch('https://libretranslate.com/translate', {
                     method: 'POST',
                     headers: {
