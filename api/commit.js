@@ -9,13 +9,13 @@ export default async function handler(req, res) {
 
     const apiUrl = `https://api.github.com/users/${GITHUB_USERNAME}/events/public?per_page=100`;
 
+    const headers = {
+        "Authorization": `token ${token}`,
+        "Accept": "application/vnd.github.v3+json"
+    };
+
     try {
-        const response = await fetch(apiUrl, {
-            headers: {
-                "Authorization": `token ${token}`,
-                "Accept": "application/vnd.github.v3+json"
-            }
-        });
+        const response = await fetch(apiUrl, { headers });
 
         if (!response.ok) {
             throw new Error(`GitHub API Error: ${response.status} ${response.statusText}`);
@@ -23,25 +23,40 @@ export default async function handler(req, res) {
 
         const events = await response.json();
         let latestPushEvent = null;
+        let commitData = null;
 
         for (const event of events) {
-            if (
-                event.type === "PushEvent" &&
-                event.payload &&
-                event.payload.commits &&
-                event.payload.commits.length > 0
-            ) {
-                latestPushEvent = event;
-                break;
+            if (event.type === "PushEvent" && event.payload) {
+                if (event.payload.commits && event.payload.commits.length > 0) {
+                    latestPushEvent = event;
+                    commitData = event.payload.commits[event.payload.commits.length - 1];
+                    break;
+                } else if (event.payload.head) {
+                    // Fallback: Fetch the commit details directly using the HEAD SHA
+                    try {
+                        const commitUrl = `https://api.github.com/repos/${event.repo.name}/commits/${event.payload.head}`;
+                        const commitResponse = await fetch(commitUrl, { headers });
+
+                        if (commitResponse.ok) {
+                            const details = await commitResponse.json();
+                            latestPushEvent = event;
+                            commitData = {
+                                sha: details.sha,
+                                message: details.commit.message
+                            };
+                            break;
+                        }
+                    } catch (e) {
+                        console.error(`Failed to fetch fallback commit for ${event.repo.name}:`, e);
+                    }
+                }
             }
         }
 
         // Cache for 5 minutes
         res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate');
 
-        if (latestPushEvent) {
-            const commitData = latestPushEvent.payload.commits[latestPushEvent.payload.commits.length - 1];
-
+        if (latestPushEvent && commitData) {
             return res.status(200).json({
                 sha: commitData.sha,
                 shortSha: commitData.sha.substring(0, 7),
