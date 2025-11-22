@@ -10,33 +10,33 @@
  *    Note: The API endpoint is set to https://libretranslate.com/translate and sends the content format as "html" so that basic HTML (like links) is preserved.
  */
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Only proceed if user's language is French or URL has ?fr
     const urlParams = new URLSearchParams(window.location.search);
     const shouldTranslate = navigator.language.startsWith('fr') || urlParams.has('fr');
     if (!shouldTranslate) return;
-    
+
     const translateElements = document.querySelectorAll('.translate');
-        translateElements.forEach(element => {
-            const manualTranslation = element.getAttribute('data-fr');
-            if (manualTranslation) {
-                // Use manual translation if provided
-                element.innerHTML = manualTranslation;
-            } else {
-                const originalHTML = element.innerHTML;
-                // Call LibreTranslate API to auto translate the content
-                fetch('https://libretranslate.com/translate', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        q: originalHTML,
-                        source: 'en',
-                        target: 'fr',
-                        format: 'html'
-                    })
+    translateElements.forEach(element => {
+        const manualTranslation = element.getAttribute('data-fr');
+        if (manualTranslation) {
+            // Use manual translation if provided
+            element.innerHTML = manualTranslation;
+        } else {
+            const originalHTML = element.innerHTML;
+            // Call LibreTranslate API to auto translate the content
+            fetch('https://libretranslate.com/translate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    q: originalHTML,
+                    source: 'en',
+                    target: 'fr',
+                    format: 'html'
                 })
+            })
                 .then(response => response.json())
                 .then(data => {
                     if (data && data.translatedText) {
@@ -46,6 +46,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 .catch(error => {
                     console.error('Translation error:', error);
                 });
-            }
-        });
+        }
+    });
 });
