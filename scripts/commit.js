@@ -38,71 +38,39 @@ function formatTimeAgo(dateString) {
 }
 
 async function fetchLatestProfileCommitInfo() {
-    const apiUrl = `https://api.github.com/users/${GITHUB_USERNAME}/events/public?per_page=30`;
+    const apiUrl = `/api/commit`;
 
     try {
-        const response = await fetch(apiUrl, {
-            headers: { Accept: "application/vnd.github.v3+json" },
-        });
+        const response = await fetch(apiUrl);
 
         if (!response.ok) {
-            throw new Error(
-                `GitHub API Error: ${response.status} ${response.statusText}`
-            );
+            throw new Error(`API Error: ${response.status}`);
         }
 
-        const events = await response.json();
-        let latestPushEvent = null;
+        const data = await response.json();
 
-        for (const event of events) {
-            if (
-                event.type === "PushEvent" &&
-                event.payload &&
-                event.payload.commits &&
-                event.payload.commits.length > 0
-            ) {
-                latestPushEvent = event;
-                break;
-            }
-        }
+        if (data.sha) {
+            const relativeTime = formatTimeAgo(data.date);
+            const commitMessage = data.message;
 
-        if (latestPushEvent) {
-            const commitData =
-                latestPushEvent.payload.commits[
-                    latestPushEvent.payload.commits.length - 1
-                ];
-            const commitSha = commitData.sha;
-            const shortSha = commitSha.substring(0, 7);
-            const repoName = latestPushEvent.repo.name;
-            const commitUrl = `https://github.com/${repoName}/commit/${commitSha}`;
-            const commitDate = latestPushEvent.created_at;
-            const relativeTime = formatTimeAgo(commitDate);
-            const commitMessage = commitData.message; // Full commit message
-
-            // Add a class "commit-tooltip-trigger" and data attribute for the message
             commitStatusElement.innerHTML = `
                     Last commit ${relativeTime}
-                    (<a href="${commitUrl}"
+                    (<a href="${data.commitUrl}"
                         target="_blank"
                         rel="noopener noreferrer"
                         class="commit-tooltip-trigger"
                         data-commit-message="${escapeHtml(
-                            commitMessage.split("\n")[0]
-                        )}">
-                        ${shortSha}
-                    </a> to ${repoName.split("/")[1]})
+                commitMessage.split("\n")[0]
+            )}">
+                        ${data.shortSha}
+                    </a> to ${data.repoName.split("/")[1]})
                 `;
         } else {
-            commitStatusElement.textContent =
-                "No recent public push events found.";
+            commitStatusElement.textContent = data.message || "No recent activity.";
         }
     } catch (error) {
         console.error("Failed to fetch profile commit info:", error);
         commitStatusElement.textContent = "Could not load last commit info.";
-        if (error.message.includes("API rate limit exceeded")) {
-            commitStatusElement.textContent +=
-                " (API rate limit likely exceeded)";
-        }
     }
 }
 
