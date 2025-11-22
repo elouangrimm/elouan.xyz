@@ -6,7 +6,7 @@
         "linkUrl": "https://sanegames.elouan.xyz/",
         "tags": "games, tools, wrapper, patches, JS"
     },
-        {
+    {
         "title": "movies.elouan.xyz",
         "description": "A very simple website to watch any movies or shows, for free! (just a redirector, don't worry)",
         "imageUrl": "../projects/images/movies.png",
@@ -27,7 +27,7 @@
         "linkUrl": "https://github.com/EpimetheusGames/ProjectPrometheus",
         "tags": "Game, Godot, itch.io"
     },
-        {
+    {
         "title": "CodePond",
         "description": "A simple code-to-image app that works with the pondiverse.",
         "imageUrl": "../projects/images/codepond.png",

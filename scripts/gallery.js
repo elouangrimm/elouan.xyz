@@ -75,8 +75,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Find the index again based on the element, in case order changes later
                     const clickedIndex = imagesData.findIndex(item => item.element === imgElement);
                     if (clickedIndex !== -1) {
-                         currentIndex = clickedIndex;
-                         openFullscreen(imagesData[currentIndex]);
+                        currentIndex = clickedIndex;
+                        openFullscreen(imagesData[currentIndex]);
                     } else {
                         console.error("Could not find image data for clicked element:", imgElement);
                     }
@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) throw new Error(`Failed to fetch image for EXIF: ${response.status}`);
             const blob = await response.blob();
 
-            EXIF.getData(blob, function() {
+            EXIF.getData(blob, function () {
                 const description = EXIF.getTag(this, "ImageDescription");
                 imageData.description = description || ''; // Store description or empty string
 
@@ -212,7 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (prevIndex !== index && imagesData[prevIndex]) {
             const prevImage = new Image();
             prevImage.src = imagesData[prevIndex].fullResUrl;
-             // console.log("Preloading prev:", imagesData[prevIndex].fileName);
+            // console.log("Preloading prev:", imagesData[prevIndex].fileName);
         }
     }
 
