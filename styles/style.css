@@ -108,7 +108,7 @@ ul {
   padding-inline-start: 1em;
 }
 
-ul > li {
+ul>li {
   list-style: "- ";
 }
 
@@ -154,7 +154,7 @@ label {
   padding: 0.3em 0;
 }
 
-label > * {
+label>* {
   display: block;
 }
 
@@ -207,7 +207,7 @@ button:focus {
   transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
   z-index: 1010;
   white-space: nowrap;
-  max-width: 250px;
+  /*max-width: 250px;*/
   pointer-events: none;
 }
 
