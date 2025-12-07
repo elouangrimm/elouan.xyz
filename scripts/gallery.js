@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 imgElement.loading = 'lazy'; // Still lazy load grid images
 
                 // Initial placeholder background (optional)
-                imgElement.style.backgroundColor = 'var(--stone-800)';
+                imgElement.style.backgroundColor = 'var(c800)';
 
                 // Store comprehensive data
                 const imageData = {
