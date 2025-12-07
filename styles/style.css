@@ -1,77 +1,28 @@
 :root {
     /* b&w */
-    --stone-050: 999;
-    --stone-100: 988;
-    --stone-200: 977;
-    --stone-300: 966;
-    --stone-400: 744;
-    --stone-500: 555;
-    --stone-600: 444;
-    --stone-700: 333;
-    --stone-800: 222;
-    --stone-900: 111;
-    --stone-950: 000;
+    --c050: #fafaf9;
+    --c100: #f5f5f4;
+    --c200: #e7e5e4;
+    --c300: #d6d3d1;
+    --c400: #a8a29e;
+    --c500: #78716c;
+    --c600: #57534e;
+    --c700: #44403c;
+    --c800: #292524;
+    --c900: #1c1917;
+    --c950: #0c0a09;
 
-    /* colors */
-    --red: 911;
-    --orange: 941;
-    --amber: 931;
-    --yellow: 991;
-    --lime: 591;
-    --elouan-green: 481;
-    --green: 491;
-    --emerald: 391;
-    --teal: 259;
-    --cyan: 099;
-    --sky: 189;
-    --blue: 159;
-    --indigo: 058;
-    --violet: 158;
-    --purple: 159;
-    --fuchsia: 359;
-    --pink: 919;
-    --rose: 912;
-
-    /* link colors */
-    --github: 988;
-    --bluesky: 189;
-    --email: 158;
-    --rss: 941;
-    --reddit: 911;
-    --signal: 159;
-    --discord: 058;
-    --default-highlight: 359;
-
-    --font-mono: 'JetBrains Mono', 'SF Mono', 'Roboto Mono', 'Cascadia Code',
-        monospace;
-
-    --green: 591;
-    --cyan: 189;
-    --blue: 159;
-    --purple: 159;
-    --pink: 919;
-    --coral: 911;
-    --red: 911;
-    --orange: 941;
-    --yellow: 991;
-    --calm-yellow: 981;
-
-    --light-blue: 169;
-
-    --shade-0: 000;
-    --shade-1: 111;
-    --shade-2: 222;
-    --shade-3: 333;
-    --shade-4: 444;
-    --shade-5: 555;
-    --shade-6: 666;
-    --shade-7: 777;
-    --shade-8: 888;
-    --shade-9: 977;
-    --shade-10: 999;
-
-    --best-colour: 269;
-    --best-colour-faded: 259;
+    --shade-0: #06070a;    /* rgb(6,7,10) */
+    --shade-1: #0e1016;    /* rgb(14,16,22) */
+    --shade-2: #181d27;    /* rgb(24,29,39) */
+    --shade-3: #212735;    /* rgb(33,39,53) */
+    --shade-4: #2f384b;    /* rgb(47,56,75) */
+    --shade-5: #374362;    /* rgb(55,67,98) */
+    --shade-6: #576593;    /* rgb(87,101,147) */
+    --shade-7: #8792ab;    /* rgb(135,146,171) */
+    --shade-8: #9faecc;    /* rgb(159,174,204) */
+    --shade-9: #e0e0e0;    /* rgb(224,224,224) */
+    --shade-10: #ffffff;   /* rgb(255,255,255) */
 
     --void: var(--shade-0);
     --black: var(--shade-2);
@@ -81,23 +32,44 @@
     --silver: var(--shade-8);
     --white: var(--shade-10);
 
-    --rainbow-1: var(--green);
-    --rainbow-2: var(--cyan);
-    --rainbow-3: var(--blue);
-    --rainbow-4: var(--purple);
-    --rainbow-5: var(--pink);
-    --rainbow-6: var(--coral);
-    --rainbow-7: var(--red);
-    --rainbow-8: var(--orange);
-    --rainbow-9: var(--yellow);
+    --coral: #ff8080;      /* rgb(255,128,128) */
+    --red: #ff4346;        /* rgb(255, 67, 70) */
+    --orange: #ff8046;     /* rgb(255, 128, 70) */
+    --amber: #f59e0b;
+    --yellow: #ffff46;     /* rgb(255, 255, 70) */
+    --lime: #84cc16;
+    --elouan-green: #7db84f;
+    --green: #46ff81;      /* rgb(70, 255, 129) */
+    --emerald: #10b981;
+    --teal: #14b8a6;
+    --cyan: #46ccff;       /* rgb(70, 204, 255) */
+    --sky: #0ea5e9;
+    --blue: #4680ff;       /* rgb(70, 128, 255) */
+    --indigo: #6366f1;
+    --violet: #8b5cf6;
+    --purple: #8043ff;     /* rgb(128, 67, 255) */
+    --fuchsia: #d946ef;
+    --pink: #ff80de;       /* rgb(255, 128, 222) */
+    --rose: #f43f5e;
 
-    --background: 333;
+    --github: var(--c100);
+    --bluesky: #048bff;
+    --email: var(--violet);
+    --rss: var(--orange);
+    --reddit: #ff4500;
+    --signal: #3a76f0;
+    --discord: #3242ed;
+    --default-highlight: var(--fuchsia);
+
+    --font-mono: 'JetBrains Mono', 'SF Mono', 'Roboto Mono', 'Cascadia Code', monospace;
+
+    --background: var(--shade-2);
 }
 
 /* global styles */
 *::selection {
     background-color: var(--indigo);
-    color: var(--stone-600);
+    color: var(--c600);
 }
 
 body {
@@ -106,8 +78,8 @@ body {
     margin: 0 auto;
     padding: 30px 10px;
     font-size: 1.1em;
-    background-color: var(--stone-950);
-    color: var(--stone-200);
+    background-color: var(--c950);
+    color: var(--c200);
     line-height: 1.6;
 }
 
@@ -138,7 +110,7 @@ a {
 
     &:hover {
         background-color: var(--color);
-        color: var(--stone-950);
+        color: var(--c950);
         outline: 2px solid var(--color);
     }
 
@@ -179,7 +151,7 @@ button {
 
     &:hover {
         background-color: var(--color);
-        color: var(--stone-050);
+        color: var(--c050);
         outline: 2px solid var(--color);
     }
 
@@ -188,9 +160,9 @@ button {
         text-decoration: none;
     }
 
-    outline: 2px solid var(--stone-800);
-    background-color: var(--stone-800);
-    color: var(--stone-050);
+    outline: 2px solid var(--c800);
+    background-color: var(--c800);
+    color: var(--c050);
     border: none;
     cursor: pointer;
 }
@@ -199,10 +171,10 @@ button {
     width: 200px;
     height: 25px;
     font-size: 18px;
-    color: var(--stone-50);
+    color: var(--c50);
 
-    background-color: var(--stone-800);
-    color: var(--stone-050);
+    background-color: var(--c800);
+    color: var(--c050);
     border: none;
 }
 
@@ -226,11 +198,11 @@ button {
 
 #tooltip-display {
     position: absolute;
-    background-color: var(--stone-800);
-    color: var(--stone-100);
+    background-color: var(--c800);
+    color: var(--c100);
     padding: 5px 10px;
     font-size: 0.85em;
-    border: 1px solid var(--stone-600);
+    border: 1px solid var(--c600);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 
     opacity: 0;
@@ -260,7 +232,7 @@ content figure img {
     width: 100%;
     max-width: 100%;
     height: auto;
-    border: 1px solid var(--stone-100);
+    border: 1px solid var(--c100);
     box-sizing: border-box;
 }
 
@@ -268,6 +240,269 @@ content figcaption {
     padding: 0.75em 0.25em;
     text-align: center;
     font-size: 0.9em;
-    color: var(--stone-400);
+    color: var(--c400);
+    line-height: 1.4;
+}
+:root {
+    /* b&w */
+    --c050: 999;
+    --c100: 988;
+    --c200: 977;
+    --c300: 966;
+    --c400: 744;
+    --c500: 555;
+    --c600: 444;
+    --c700: 333;
+    --c800: 222;
+    --c900: 111;
+    --c950: 000;
+
+    /* colors */
+    --red: 911;
+        /* b&w */
+        --c050: #fafaf9;
+        --c100: #f5f5f4;
+        --c200: #e7e5e4;
+        --c300: #d6d3d1;
+        --c400: #a8a29e;
+        --c500: #78716c;
+        --c600: #57534e;
+        --c700: #44403c;
+        --c800: #292524;
+        --c900: #1c1917;
+        --c950: #0c0a09;
+
+        /* colors */
+        --red: #ef4444;
+        --orange: #f97316;
+        --amber: #f59e0b;
+        --yellow: #eab308;
+        --lime: #84cc16;
+        --elouan-green: #7db84f;
+        --green: #22c55e;
+        --emerald: #10b981;
+        --teal: #14b8a6;
+        --cyan: #06b6d4;
+        --sky: #0ea5e9;
+        --blue: #3b82f6;
+        --indigo: #6366f1;
+        --violet: #8b5cf6;
+        --purple: #a855f7;
+        --fuchsia: #d946ef;
+        --pink: #ec4899;
+        --rose: #f43f5e;
+
+        /* link colors */
+        --github: var(--c100);
+        --bluesky: #048bff;
+        --email: var(--violet);
+        --rss: var(--orange);
+        --reddit: #ff4500;
+        --signal: #3a76f0;
+        --discord: #3242ed;
+        --default-highlight: var(--fuchsia);
+
+        --font-mono: 'JetBrains Mono', 'SF Mono', 'Roboto Mono', 'Cascadia Code',
+            monospace;
+
+        --green: rgb(70, 255, 129);
+        --cyan: rgb(70, 204, 255);
+        --blue: rgb(70, 128, 255);
+        --purple: rgb(128, 67, 255);
+        --pink: rgb(255, 128, 222);
+        --coral: rgb(255, 128, 128);
+        --red: rgb(255, 67, 70);
+        --orange: rgb(255, 128, 70);
+        --yellow: rgb(255, 255, 70);
+        --calm-yellow: rgb(255, 225, 70);
+
+        --light-blue: rgb(80, 140, 255);
+
+        --shade-0: rgb(6, 7, 10);
+        --shade-1: rgb(14, 16, 22);
+        --shade-2: rgb(24, 29, 39);
+        --shade-3: rgb(33, 39, 53);
+        --shade-4: rgb(47, 56, 75);
+        --shade-5: rgb(55, 67, 98);
+        --shade-6: rgb(87, 101, 147);
+        --shade-7: rgb(135, 146, 171);
+        --shade-8: rgb(159, 174, 204);
+        --shade-9: rgb(224, 224, 224);
+        --shade-10: rgb(255, 255, 255);
+
+        --best-colour: #9faeee;
+        --best-colour-faded: rgb(172, 139, 255);
+
+        --void: var(--shade-0);
+        --black: var(--shade-2);
+        --dark-grey: var(--shade-3);
+        --grey: var(--shade-5);
+        --light-grey: var(--shade-6);
+        --silver: var(--shade-8);
+        --white: var(--shade-10);
+
+        --rainbow-1: var(--green);
+        --rainbow-2: var(--cyan);
+        --rainbow-3: var(--blue);
+        --rainbow-4: var(--purple);
+        --rainbow-5: var(--pink);
+        --rainbow-6: var(--coral);
+        --rainbow-7: var(--red);
+        --rainbow-8: var(--orange);
+        --rainbow-9: var(--yellow);
+
+        --background: rgb(31, 39, 54);
+    }
+
+ul {
+    padding-inline-start: 1em;
+
+    >li {
+        list-style: '- ';
+    }
+}
+
+/* links */
+a {
+    --color: var(--blue);
+    color: var(--color);
+
+    &.heading {
+        text-decoration: none;
+    }
+
+    &:hover {
+        background-color: var(--color);
+        color: var(--c950);
+        outline: 2px solid var(--color);
+    }
+
+    &:focus {
+        outline: 2px solid var(--color);
+        text-decoration: none;
+    }
+}
+
+a.big {
+    padding: 0.1em;
+    font-weight: bold;
+    margin: 0 0.2em;
+
+    &:first-of-type {
+        margin-left: 0;
+    }
+}
+
+#github-profile-commit-status a {
+    --color: var(--github);
+    font-weight: bold;
+}
+
+/* buttons and forms */
+label {
+    display: block;
+    padding: 0.3em 0;
+
+    >* {
+        display: block;
+    }
+}
+
+button {
+    --color: var(--blue);
+    color: var(--color);
+
+    &:hover {
+        background-color: var(--color);
+        color: var(--c050);
+        outline: 2px solid var(--color);
+    }
+
+    &:focus {
+        outline: 2px solid var(--color);
+        text-decoration: none;
+    }
+
+    outline: 2px solid var(--c800);
+    background-color: var(--c800);
+    color: var(--c050);
+    border: none;
+    cursor: pointer;
+}
+
+.search {
+    width: 200px;
+    height: 25px;
+    font-size: 18px;
+    color: var(--c50);
+
+    background-color: var(--c800);
+    color: var(--c050);
+    border: none;
+}
+
+/* headings and specific elements */
+.heading {
+    font-family: var(--font-mono);
+    line-height: 1.2;
+    text-decoration: none;
+}
+
+.heading a {
+    text-decoration: none;
+}
+
+/* tooltips */
+.has-tooltip {
+    border-bottom: 1px dotted var(--fuchsia);
+    cursor: help;
+    position: relative;
+}
+
+#tooltip-display {
+    position: absolute;
+    background-color: var(--c800);
+    color: var(--c100);
+    padding: 5px 10px;
+    font-size: 0.85em;
+    border: 1px solid var(--c600);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+
+    z-index: 1010;
+
+    white-space: nowrap;
+    max-width: 250px;
+
+    pointer-events: none;
+}
+
+#tooltip-display.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* content specific styles */
+content figure {
+    margin: 2em 0;
+}
+
+content figure img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border: 1px solid var(--c100);
+    box-sizing: border-box;
+}
+
+content figcaption {
+    padding: 0.75em 0.25em;
+    text-align: center;
+    font-size: 0.9em;
+    color: var(--c400);
     line-height: 1.4;
 }
