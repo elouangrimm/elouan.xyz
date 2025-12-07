@@ -1,225 +1,239 @@
 :root {
-    /* b&w */
-    --stone-050: #fafaf9;
-    --stone-100: #f5f5f4;
-    --stone-200: #e7e5e4;
-    --stone-300: #d6d3d1;
-    --stone-400: #a8a29e;
-    --stone-500: #78716c;
-    --stone-600: #57534e;
-    --stone-700: #44403c;
-    --stone-800: #292524;
-    --stone-900: #1c1917;
-    --stone-950: #0c0a09;
+  /* --- Grayscale (B&W) --- */
+  --c050: #fafaf9;
+  --c100: #f5f5f4;
+  --c200: #e7e5e4;
+  --c300: #d6d3d1;
+  --c400: #a8a29e;
+  --c500: #78716c;
+  --c600: #57534e;
+  --c700: #44403c;
+  --c800: #292524;
+  --c900: #1c1917;
+  --c950: #0c0a09;
 
-    /* colors */
-    --red: #ef4444;
-    --orange: #f97316;
-    --amber: #f59e0b;
-    --yellow: #eab308;
-    --lime: #84cc16;
-    --elouan-green: #7db84f;
-    --green: #22c55e;
-    --emerald: #10b981;
-    --teal: #14b8a6;
-    --cyan: #06b6d4;
-    --sky: #0ea5e9;
-    --blue: #3b82f6;
-    --indigo: #6366f1;
-    --violet: #8b5cf6;
-    --purple: #a855f7;
-    --fuchsia: #d946ef;
-    --pink: #ec4899;
-    --rose: #f43f5e;
+  /* --- Shades --- */
+  --shade-0: #06070a;
+  --shade-1: #0e1016;
+  --shade-2: #181d27;
+  --shade-3: #212735;
+  --shade-4: #2f384b;
+  --shade-5: #374362;
+  --shade-6: #576593;
+  --shade-7: #8792ab;
+  --shade-8: #9faecc;
+  --shade-9: #e0e0e0;
+  --shade-10: #ffffff;
 
-    /* link colors */
-    --github: var(--stone-100);
-    --bluesky: #048bff;
-    --email: var(--violet);
-    --rss: var(--orange);
-    --reddit: #ff4500;
-    --signal: #3a76f0;
-    --discord: #3242ed;
-    --default-highlight: var(--fuchsia);
+  /* --- Semantic Mappings --- */
+  --void: var(--shade-0);
+  --black: var(--shade-2);
+  --dark-grey: var(--shade-3);
+  --grey: var(--shade-5);
+  --light-grey: var(--shade-6);
+  --silver: var(--shade-8);
+  --white: var(--shade-10);
+  --background: var(--shade-2);
 
-    --font-mono: 'JetBrains Mono', 'SF Mono', 'Roboto Mono', 'Cascadia Code',
-        monospace;
+  /* --- Palette --- */
+  --coral: #ff8080;
+  --red: #ff4346;
+  --orange: #ff8046;
+  --amber: #f59e0b;
+  --yellow: #ffff46;
+  --lime: #84cc16;
+  --elouan-green: #7db84f;
+  --green: #46ff81;
+  --emerald: #10b981;
+  --teal: #14b8a6;
+  --cyan: #46ccff;
+  --sky: #0ea5e9;
+  --blue: #4680ff;
+  --indigo: #6366f1;
+  --violet: #8b5cf6;
+  --purple: #8043ff;
+  --fuchsia: #d946ef;
+  --pink: #ff80de;
+  --rose: #f43f5e;
+
+  /* --- Socials & Links --- */
+  --github: var(--c100);
+  --bluesky: #048bff;
+  --email: var(--violet);
+  --rss: var(--orange);
+  --reddit: #ff4500;
+  --signal: #3a76f0;
+  --discord: #3242ed;
+  --default-highlight: var(--fuchsia);
+
+  /* --- Typography --- */
+  --font-mono: "JetBrains Mono", "SF Mono", "Roboto Mono", "Cascadia Code", monospace;
 }
 
-/* global styles */
-*::selection {
-    background-color: var(--indigo);
-    color: var(--stone-600);
-}
-
+/* --- Global Styles --- */
 body {
-    font-family: Inter, sans-serif;
-    max-width: 750px;
-    margin: 0 auto;
-    padding: 30px 10px;
-    font-size: 1.1em;
-    background-color: var(--stone-950);
-    color: var(--stone-200);
-    line-height: 1.6;
+  font-family: Inter, sans-serif;
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 30px 10px;
+  font-size: 1.1em;
+  background-color: var(--c950);
+  color: var(--c200);
+  line-height: 1.6;
 }
 
-/* typography */
+*::selection {
+  background-color: var(--indigo);
+  color: var(--c600);
+}
+
+/* --- Typography --- */
 h1,
 h2,
-h3 {
-    font-family: var(--font-mono);
-    line-height: 1.2;
-}
-
-ul {
-    padding-inline-start: 1em;
-
-    >li {
-        list-style: '- ';
-    }
-}
-
-/* links */
-a {
-    --color: var(--blue);
-    color: var(--color);
-
-    &.heading {
-        text-decoration: none;
-    }
-
-    &:hover {
-        background-color: var(--color);
-        color: var(--stone-950);
-        outline: 2px solid var(--color);
-    }
-
-    &:focus {
-        outline: 2px solid var(--color);
-        text-decoration: none;
-    }
-}
-
-a.big {
-    padding: 0.1em;
-    font-weight: bold;
-    margin: 0 0.2em;
-
-    &:first-of-type {
-        margin-left: 0;
-    }
-}
-
-#github-profile-commit-status a {
-    --color: var(--github);
-    font-weight: bold;
-}
-
-/* buttons and forms */
-label {
-    display: block;
-    padding: 0.3em 0;
-
-    >* {
-        display: block;
-    }
-}
-
-button {
-    --color: var(--blue);
-    color: var(--color);
-
-    &:hover {
-        background-color: var(--color);
-        color: var(--stone-050);
-        outline: 2px solid var(--color);
-    }
-
-    &:focus {
-        outline: 2px solid var(--color);
-        text-decoration: none;
-    }
-
-    outline: 2px solid var(--stone-800);
-    background-color: var(--stone-800);
-    color: var(--stone-050);
-    border: none;
-    cursor: pointer;
-}
-
-.search {
-    width: 200px;
-    height: 25px;
-    font-size: 18px;
-    color: var(--stone-50);
-
-    background-color: var(--stone-800);
-    color: var(--stone-050);
-    border: none;
-}
-
-/* headings and specific elements */
+h3,
 .heading {
-    font-family: var(--font-mono);
-    line-height: 1.2;
-    text-decoration: none;
+  font-family: var(--font-mono);
+  line-height: 1.2;
+}
+
+.heading {
+  text-decoration: none;
 }
 
 .heading a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
-/* tooltips */
+ul {
+  padding-inline-start: 1em;
+}
+
+ul>li {
+  list-style: "- ";
+}
+
+/* --- Links --- */
+a {
+  --color: var(--blue);
+  color: var(--color);
+}
+
+a.heading {
+  text-decoration: none;
+}
+
+a:hover {
+  background-color: var(--color);
+  color: var(--c950);
+  outline: 2px solid var(--color);
+}
+
+a:focus {
+  outline: 2px solid var(--color);
+  text-decoration: none;
+}
+
+a.big {
+  padding: 0.1em;
+  font-weight: bold;
+  margin: 0 0.2em;
+}
+
+a.big:first-of-type {
+  margin-left: 0;
+}
+
+#github-profile-commit-status a {
+  --color: var(--github);
+  font-weight: bold;
+}
+
+/* --- Forms & Buttons --- */
+label {
+  display: block;
+  padding: 0.3em 0;
+}
+
+label>* {
+  display: block;
+}
+
+button {
+  --color: var(--blue);
+  color: var(--c050);
+  background-color: var(--c800);
+  outline: 2px solid var(--c800);
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--color);
+  color: var(--c050);
+  outline: 2px solid var(--color);
+}
+
+button:focus {
+  outline: 2px solid var(--color);
+  text-decoration: none;
+}
+
+.search {
+  width: 200px;
+  height: 25px;
+  font-size: 18px;
+  background-color: var(--c800);
+  color: var(--c050);
+  border: none;
+}
+
+/* --- Tooltips --- */
 .has-tooltip {
-    border-bottom: 1px dotted var(--fuchsia);
-    cursor: help;
-    position: relative;
+  border-bottom: 1px dotted var(--fuchsia);
+  cursor: help;
+  position: relative;
 }
 
 #tooltip-display {
-    position: absolute;
-    background-color: var(--stone-800);
-    color: var(--stone-100);
-    padding: 5px 10px;
-    font-size: 0.85em;
-    border: 1px solid var(--stone-600);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
-
-    z-index: 1010;
-
-    white-space: nowrap;
-    max-width: 250px;
-
-    pointer-events: none;
+  position: absolute;
+  background-color: var(--c800);
+  color: var(--c100);
+  padding: 5px 10px;
+  font-size: 0.85em;
+  border: 1px solid var(--c600);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+  z-index: 1010;
+  white-space: nowrap;
+  /*max-width: 250px;*/
+  pointer-events: none;
 }
 
 #tooltip-display.visible {
-    opacity: 1;
-    visibility: visible;
+  opacity: 1;
+  visibility: visible;
 }
 
-/* content specific styles */
+/* --- Content & Figures --- */
 content figure {
-    margin: 2em 0;
+  margin: 2em 0;
 }
 
 content figure img {
-    display: block;
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    border: 1px solid var(--stone-100);
-    box-sizing: border-box;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--c100);
+  box-sizing: border-box;
 }
 
 content figcaption {
-    padding: 0.75em 0.25em;
-    text-align: center;
-    font-size: 0.9em;
-    color: var(--stone-400);
-    line-height: 1.4;
+  padding: 0.75em 0.25em;
+  text-align: center;
+  font-size: 0.9em;
+  color: var(--c400);
+  line-height: 1.4;
 }
