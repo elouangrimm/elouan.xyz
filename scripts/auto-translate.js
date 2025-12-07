@@ -1,4 +1,7 @@
 /*
+
+DEPRACATED: This script is no longer used in the current version of the website.
+
  * Auto Translation script
  * This script translates any element with the class "translate" from English to French.
  * If an element has a custom French translation provided via a data-fr attribute, that translation will be used instead.

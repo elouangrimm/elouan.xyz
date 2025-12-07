@@ -33,7 +33,7 @@
     display: block;
     /* Important for columns */
     overflow: hidden;
-    background-color: var(c800);
+    background-color: var(--c800);
 
     /* --- CRUCIAL CHANGES FOR MASONRY --- */
     margin-bottom: 15px;
@@ -110,7 +110,7 @@
 .project-title {
     font-family: var(--font-mono);
     font-size: 1.25rem;
-    color: var(c100);
+    color: var(--c100);
     margin: 0 0 0.25em 0;
     line-height: 1.2;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
@@ -118,7 +118,7 @@
 
 .project-description {
     font-size: 0.9rem;
-    color: var(c300);
+    color: var(--c300);
     line-height: 1.5;
     margin: 0;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
@@ -134,7 +134,7 @@
 .project-tag {
     display: inline-block;
     background-color: rgba(87, 83, 78, 0.8);
-    color: var(c100);
+    color: var(--c100);
     padding: 3px 8px;
     font-size: 0.75rem;
     font-weight: 500;

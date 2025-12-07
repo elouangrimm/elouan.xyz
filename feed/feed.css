@@ -19,7 +19,7 @@ h4 .danger {
 }
 
 .item-container {
-    background-color: var(c950);
+    background-color: var(--c950);
 }
 
 #feed {

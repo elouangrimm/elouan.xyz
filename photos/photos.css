@@ -16,7 +16,7 @@
     object-fit: cover;
     cursor: pointer;
     display: block;
-    background-color: var(c800);
+    background-color: var(--c800);
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
     color: transparent; 
     text-indent: -10000px; 
@@ -65,7 +65,7 @@
 }
 
 .image-description {
-    color: var(c100);
+    color: var(--c100);
     text-align: center;
     padding: 15px 5px 5px 5px;
     font-size: 0.9em;
