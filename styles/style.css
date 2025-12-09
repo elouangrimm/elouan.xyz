@@ -104,6 +104,10 @@ h3,
   text-decoration: none;
 }
 
+.top-title {
+  --color: var(--c50);
+}
+
 ul {
   padding-inline-start: 1em;
 }
@@ -236,4 +240,10 @@ content figcaption {
   font-size: 0.9em;
   color: var(--c400);
   line-height: 1.4;
+}
+
+/* --- Custom Elements --- */
+#github-profile-commit-status {
+  padding: 10px 0;
+  font-size: 0.9em;
 }
