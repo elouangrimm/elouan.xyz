@@ -20,8 +20,8 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="elouan.xyz" />
 
-    <script src="/scripts/analytics.js"></script>
-    <script src="/scripts/tooltip.js"></script>
+    <script src="/scripts/analytics.js" defer></script>
+    <script src="/scripts/tooltip.js" defer></script>
 </head>
 
 <body>
@@ -99,21 +99,21 @@
     </main>
 
     <div id="tooltip-display" class="tooltip" role="tooltip"></div>
-    <script src="/scripts/roller.js"></script>
-    <script src="/scripts/commit.js"></script>
+    <script src="/scripts/roller.js" defer></script>
+    <script src="/scripts/commit.js" defer></script>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            console.log(`
-                    welcome to the D̸͚̤̖̘̿͆̒̎͒̚E̵̬̭̖̼͗̇͌͗͘V̷͈̪̟̾̇̊̐̈́͗ͅ ̵̳̬̞̞̟̀͊̕T̷̥̞̍͑̾̈́̃̃ͅȎ̷̡̹̪̠̳̈́̾̇̚̚Õ̴͕̓̽Ḻ̴̡̬̬͓̐S̶̯͍͊̓͝!!!
-                `)
-        });
-    </script>
-    <script src="scripts/seo.js"></script>
+    <script src="scripts/seo.js" defer></script>
     <script defer src="https://cdn.jsdelivr.net/npm/quicklink@3.0.1/dist/quicklink.umd.js"></script>
     <script>
         window.addEventListener('load', () => {
             quicklink.listen();
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            console.log(`
+                    welcome to the D̸͚̤̖̘̿͆̒̎͒̚E̵̬̭̖̼͗̇͌͗͘V̷͈̪̟̾̇̊̐̈́͗ͅ ̵̳̬̞̞̟̀͊̕T̷̥̞̍͑̾̈́̃̃ͅȎ̷̡̹̪̠̳̾̈́̇̚̚Õ̴͕̓̽Ḻ̴̡̬̬͓̐S̶̯͍͊̓͝!!!
+                `)
         });
     </script>
 </body>

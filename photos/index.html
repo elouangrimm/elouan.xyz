@@ -10,9 +10,9 @@
     <link rel="stylesheet" href="/styles/style.css" />
     <link rel="stylesheet" href="/photos/photos.css" />
 
-    <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
-    <script src="/scripts/tooltip.js"></script>
-    <script src="/scripts/analytics.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/exif-js" defer></script>
+    <script src="/scripts/tooltip.js" defer></script>
+    <script src="/scripts/analytics.js" defer></script>
 </head>
 
 <body>
@@ -20,10 +20,12 @@
 
     <h3>All taken by Me!</h3>
     <h4>
-        ...using either a <span class="has-tooltip" data-tooltip="Canon EOS 80D">Canon DSLR camera</span> borrowed from the
+        ...using either a <span class="has-tooltip" data-tooltip="Canon EOS 80D">Canon DSLR camera</span> borrowed from
+        the
         Oregon Museum of
         Science and Industry, my cheap $100
-        <a href="https://nuumobile.com/product/a23-plus-android-smartphone/">Android phone</a>, or my 2015 Canon EOS 1200D.
+        <a href="https://nuumobile.com/product/a23-plus-android-smartphone/">Android phone</a>, or my 2015 Canon EOS
+        1200D.
     </h4>
 
     <hr />
@@ -42,7 +44,7 @@
     </div>
 
     <div id="tooltip-display" class="tooltip" role="tooltip"></div>
-    <script src="/scripts/gallery.js"></script>
+    <script src="/scripts/gallery.js" defer></script>
     <script defer src="https://cdn.jsdelivr.net/npm/quicklink@3.0.1/dist/quicklink.umd.js"></script>
     <script>
         window.addEventListener('load', () => {
