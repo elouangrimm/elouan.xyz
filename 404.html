@@ -14,7 +14,15 @@
 
 <body>
     <h1 class="heading"><a href="/">elouan.xyz</a> // 404</h1>
-    <p>Whatever you were looking for, it's not here.</p>
+    <p id="error-message">Whatever you were looking for, it's not here.</p>
+    
+    <script>
+        // Check if the ?short parameter is present in the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('short')) {
+            document.getElementById('error-message').textContent = 'The short URL you visited is incorrect or does not exist anymore.';
+        }
+    </script>
 </body>
 
 </html>
