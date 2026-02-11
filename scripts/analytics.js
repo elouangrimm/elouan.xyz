@@ -1,6 +1,8 @@
 // PostHog Analytics Initialization
 // This script initializes PostHog analytics for tracking
 
+const VERSION = "4.0.0";
+
 !function (e, t) { 
     var s, r, o, i; 
     t.__SV || (window.posthog = t, t._i = [], t.init = function (n, a, p) { 
@@ -27,3 +29,5 @@ posthog.init("phc_W4DPbbp1Qbz4lPVtWrFF54GFUabBHpKzNJx9U6fryBZ", {
     ui_host: "https://us.posthog.com",
     person_profiles: "always",
 });
+
+console.log("Current site version: " + VERSION)
