@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
     "__comment": "this is only for versioning and metadata, used for logging and debugging",
-    "version": "4.0.2",
+    "version": "4.0.3",
     "name": "elouan.xyz"
 }
