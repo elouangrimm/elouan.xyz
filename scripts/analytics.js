@@ -27,7 +27,7 @@
                     ) + "/static/array.js"),
                 (o.onerror = function () {
                     console.log(
-                        "good on you for using an ad blocker... sorry for trying",
+                        "↑↑↑ good on you for using an ad blocker... sorry for even trying to track you in the first place 😉",
                     );
                 }),
                 (i =
