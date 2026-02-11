@@ -25,6 +25,11 @@
                         ".i.posthog.com",
                         "-assets.i.posthog.com",
                     ) + "/static/array.js"),
+                (o.onerror = function () {
+                    console.log(
+                        "good on you for using an ad blocker... sorry for trying",
+                    );
+                }),
                 (i =
                     e.getElementsByTagName(
                         "script",
