@@ -1,7 +1,6 @@
 const rollers = document.querySelectorAll('[data-roller]');
 
 rollers.forEach((roller) => {
-    if (roller == "") return;
     const optionsString = roller.dataset.roller ?? '';
     if (!optionsString) return;
     const options = optionsString.split('; ');

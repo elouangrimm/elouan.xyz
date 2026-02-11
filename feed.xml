@@ -2,7 +2,8 @@
     <channel>
         <title>elouan.xyz</title>
         <link>https://elouan.xyz</link>
-        <description>The site of Elouan Grimm</description>
+        <description>elouan's website</description>
+        <language>en</language>
         <item>
             <title>Welcome to elouan.xyz</title>
             <link>https://elouan.xyz/</link>

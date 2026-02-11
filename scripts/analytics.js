@@ -64,6 +64,6 @@ posthog.init("phc_W4DPbbp1Qbz4lPVtWrFF54GFUabBHpKzNJx9U6fryBZ", {
     person_profiles: "always",
 });
 
-import("./manifest.json", { assert: { type: "json" } }).then((module) => {
+import("manifest.json", { assert: { type: "json" } }).then((module) => {
     console.log("Current site version: " + module.default.version);
 });

@@ -83,7 +83,6 @@ const renderItems = (items) => {
 const search = document.querySelector("#search");
 
 function updateSearch(searchTerm) {
-    // console.log(searchTerm);
     if (!searchTerm) {
         renderItems(currentItems);
         return;
