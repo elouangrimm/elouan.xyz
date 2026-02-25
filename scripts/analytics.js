@@ -27,7 +27,9 @@
                     ) + "/static/array.js"),
                 (o.onerror = function () {
                     console.log(
-                        "↑↑↑ good on you for using an ad blocker... sorry for even trying to track you in the first place 😉",
+                        "%c↑↑↑ good on you for using an ad blocker... sorry for even trying to track you in the first place %c😉",
+                        "font-style: italic; font-size: 1.25em;",
+                        "font-style: none; font-size: 1.25em;",
                     );
                 }),
                 (i =
@@ -70,5 +72,41 @@ posthog.init("phc_W4DPbbp1Qbz4lPVtWrFF54GFUabBHpKzNJx9U6fryBZ", {
 });
 
 fetch("/manifest.json")
-    .then((r) => r.json())
-    .then((m) => console.log("Current site version: " + m.version));
+    .then((r) => r.json());
+
+document.addEventListener("DOMContentLoaded", () => {
+    setTimeout(function () {
+        // === welcome banner ===
+        const _3d = (color, shadow) =>
+            `font-family: 'JetBrains Mono', 'SF Mono', 'Roboto Mono', 'Cascadia Code', monospace; font-size: 3em; font-weight: 700; color: ${color}; text-shadow: 1px 1px 1px ${shadow}, 1px 2px 1px ${shadow}, 1px 3px 1px ${shadow}, 1px 4px 1px ${shadow}, 1px 5px 1px ${shadow}, 1px 13px 6px rgba(16,16,16,0.4), 1px 22px 10px rgba(16,16,16,0.2), 1px 25px 35px rgba(16,16,16,0.2), 1px 30px 60px rgba(16,16,16,0.4); padding: 10px 0`
+        console.log(
+            "%cwelcome to %ce%cl%co%cu%ca%cn%c.%cx%cy%cz \n%cand the dev tools",
+            _3d("#4680ff", "#1c50be"),
+            _3d("#ff6b6b", "#8b2e2e"),
+            _3d("#ffa94d", "#7a4e1a"),
+            _3d("#ffd43b", "#7a6010"),
+            _3d("#69db7c", "#2a6b38"),
+            _3d("#4dabf7", "#1a5a8a"),
+            _3d("#748ffc", "#2a3a8a"),
+            _3d("#9775fa", "#3d2a7a"),
+            _3d("#da77f2", "#6a2a7a"),
+            _3d("#f783ac", "#7a2a4a"),
+            _3d("#ff6b6b", "#8b2e2e"),
+            "position: absolute; top: 50%; right: 50%; transform: translate(50%,-50%); font-family: 'JetBrains Mono', 'SF Mono', 'Roboto Mono', 'Cascadia Code', monospace; font-size: 2em; font-weight: 700; font-style: italic; color: #f59e0b; text-shadow: 1px 1px 1px #72582a, 1px 2px 1px #72582a, 1px 3px 1px #72582a, 1px 4px 1px #72582a, 1px 5px 1px #72582a, 1px 13px 6px rgba(16,16,16,0.4), 1px 22px 10px rgba(16,16,16,0.2), 1px 25px 35px rgba(16,16,16,0.2), 1px 30px 60px rgba(16,16,16,0.4);padding:10px",
+        )
+
+        console.log("\n \n \n")
+
+        // === site stats table ===
+        console.log("%csite info:", "color: #4680ff; font-family: 'JetBrains Mono', 'SF Mono', 'Roboto Mono', 'Cascadia Code', monospace; font-size: 1.5em; font-weight: bold; border-bottom: 2px solid #4680ff; padding-bottom: 2px")
+        console.table({
+            "stack":     { value: "HTML + CSS + vanilla JS" },
+            "hosting":   { value: "Vercel" },
+            "analytics": { value: "PostHog" },
+            "framework": { value: "none. raw dogging it." },
+            "source": { value: "github.com/elouangrimm/elouan.xyz" },
+
+        })
+
+    }, 500)
+});
