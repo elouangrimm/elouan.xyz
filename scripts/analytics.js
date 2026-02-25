@@ -75,6 +75,12 @@ posthog.init("phc_W4DPbbp1Qbz4lPVtWrFF54GFUabBHpKzNJx9U6fryBZ", {
 fetch("/manifest.json")
     .then((r) => r.json());
 
+const isChromium =
+    !!window.chrome ||
+    (navigator.userAgentData?.brands?.some((b) =>
+        b.brand.toLowerCase().includes("chromium"),
+    ) ?? false);
+
 document.addEventListener("DOMContentLoaded", () => {
     setTimeout(function () {
         console.log("\n \n \n")
@@ -85,7 +91,9 @@ document.addEventListener("DOMContentLoaded", () => {
         
         
         `
-        console.log("%c ", `font-size: 1px; line-height: 1px; padding: 64px 64px; background: ${logoBase64} no-repeat center/128px 128px`)
+        if (isChromium) {
+            console.log("%c ", `font-size: 1px; line-height: 1px; padding: 64px 64px; background: ${logoBase64} no-repeat center/128px 128px`);
+        }
 
         const _3d = (color, shadow) =>
             `font-family: 'JetBrains Mono', 'SF Mono', 'Roboto Mono', 'Cascadia Code', monospace; font-size: 3em; font-weight: 700; color: ${color}; text-shadow: 1px 1px 1px ${shadow}, 1px 2px 1px ${shadow}, 1px 3px 1px ${shadow}, 1px 4px 1px ${shadow}, 1px 5px 1px ${shadow}, 1px 13px 6px rgba(16,16,16,0.4), 1px 22px 10px rgba(16,16,16,0.2), 1px 25px 35px rgba(16,16,16,0.2), 1px 30px 60px rgba(16,16,16,0.4); padding: 10px 0`
