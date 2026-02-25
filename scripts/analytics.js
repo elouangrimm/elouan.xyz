@@ -27,7 +27,8 @@
                     ) + "/static/array.js"),
                 (o.onerror = function () {
                     console.log(
-                        "%c↑↑↑ good on you for using an ad blocker... sorry for even trying to track you in the first place %c😉\n\n\n\n",
+                        "\n%c↑↑↑ %cgood on you for using an ad blocker... sorry for even trying to track you in the first place %c😉\n",
+                        "font-style: none; font-size: 1.25em;",
                         "font-style: italic; font-size: 1.25em;",
                         "font-style: none; font-size: 1.25em;",
                     );
