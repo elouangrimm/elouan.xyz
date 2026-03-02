@@ -72,8 +72,9 @@ posthog.init("phc_W4DPbbp1Qbz4lPVtWrFF54GFUabBHpKzNJx9U6fryBZ", {
     cookieless_mode: 'always',
 });
 
-fetch("/manifest.json")
-    .then((r) => r.json());
+const manifestPromise = fetch("/manifest.json")
+    .then((r) => r.json())
+    .catch(() => ({}));
 
 const isChromium =
     !!window.chrome ||
@@ -117,14 +118,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // === site stats table ===
         console.log("%csite info:", "color: #4680ff; font-family: 'JetBrains Mono', 'SF Mono', 'Roboto Mono', 'Cascadia Code', monospace; font-size: 1.5em; font-weight: bold; border-bottom: 2px solid #4680ff; padding-bottom: 2px")
-        console.table({
-            "stack": { value: "HTML + CSS + vanilla JS" },
-            "hosting": { value: "Vercel" },
-            "analytics": { value: "PostHog" },
-            "framework": { value: "none. raw dogging it." },
-            "source": { value: "github.com/elouangrimm/elouan.xyz" },
-
-        })
+        const siteStats = {
+            stack: { value: "HTML + CSS + vanilla JS" },
+            hosting: { value: "Vercel" },
+            analytics: { value: "PostHog" },
+            framework: { value: "none. raw dogging it." },
+            source: { value: "github.com/elouangrimm/elouan.xyz" },
+        };
+        manifestPromise.then((manifest) => {
+            console.table({
+                ...siteStats,
+                version: { value: manifest.version ?? "check github :(" },
+            });
+        });
 
     }, 500)
 });
