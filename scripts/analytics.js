@@ -4,42 +4,42 @@
     var s, r, o, i;
     t.__SV ||
         ((window.posthog = t),
-        (t._i = []),
-        (t.init = function (n, a, p) {
-            function g(e, t) {
-                var s = t.split(".");
-                (2 == s.length && ((e = e[s[0]]), (t = s[1])),
-                    (e[t] = function () {
-                        e.push(
-                            [t].concat(
-                                Array.prototype.slice.call(arguments, 0),
-                            ),
+            (t._i = []),
+            (t.init = function (n, a, p) {
+                function g(e, t) {
+                    var s = t.split(".");
+                    (2 == s.length && ((e = e[s[0]]), (t = s[1])),
+                        (e[t] = function () {
+                            e.push(
+                                [t].concat(
+                                    Array.prototype.slice.call(arguments, 0),
+                                ),
+                            );
+                        }));
+                }
+                (((o = e.createElement("script")).type = "text/javascript"),
+                    (o.crossOrigin = "anonymous"),
+                    (o.async = !0),
+                    (o.src =
+                        a.api_host.replace(
+                            ".i.posthog.com",
+                            "-assets.i.posthog.com",
+                        ) + "/static/array.js"),
+                    (o.onerror = function () {
+                        console.log(
+                            "\n%c↑↑↑ %cgood on you for using an ad blocker... sorry for even trying to track you in the first place %c😉\n",
+                            "font-style: none; font-size: 1.25em;",
+                            "font-style: italic; font-size: 1.25em;",
+                            "font-style: none; font-size: 1.25em;",
                         );
-                    }));
-            }
-            (((o = e.createElement("script")).type = "text/javascript"),
-                (o.crossOrigin = "anonymous"),
-                (o.async = !0),
-                (o.src =
-                    a.api_host.replace(
-                        ".i.posthog.com",
-                        "-assets.i.posthog.com",
-                    ) + "/static/array.js"),
-                (o.onerror = function () {
-                    console.log(
-                        "\n%c↑↑↑ %cgood on you for using an ad blocker... sorry for even trying to track you in the first place %c😉\n",
-                        "font-style: none; font-size: 1.25em;",
-                        "font-style: italic; font-size: 1.25em;",
-                        "font-style: none; font-size: 1.25em;",
-                    );
-                }),
-                (i =
-                    e.getElementsByTagName(
-                        "script",
-                    )[0]).parentNode.insertBefore(o, i));
-            var c = t;
-            for (
-                void 0 !== p ? (c = t[p] = []) : (p = "posthog"),
+                    }),
+                    (i =
+                        e.getElementsByTagName(
+                            "script",
+                        )[0]).parentNode.insertBefore(o, i));
+                var c = t;
+                for (
+                    void 0 !== p ? (c = t[p] = []) : (p = "posthog"),
                     c.people = c.people || [],
                     c.toString = function (e) {
                         var t = "posthog";
@@ -53,23 +53,23 @@
                         return c.toString(1) + ".people (stub)";
                     },
                     s =
-                        "init bs ws ge fs capture De Ai $s register register_once register_for_session unregister unregister_for_session Is getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty xs Ss createPersonProfile Es gs opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing ys debug ks getPageViewId captureTraceFeedback captureTraceMetric".split(
-                            " ",
-                        ),
+                    "init bs ws ge fs capture De Ai $s register register_once register_for_session unregister unregister_for_session Is getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty xs Ss createPersonProfile Es gs opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing ys debug ks getPageViewId captureTraceFeedback captureTraceMetric".split(
+                        " ",
+                    ),
                     r = 0;
-                r < s.length;
-                r++
-            )
-                g(c, s[r]);
-            t._i.push([n, a, p]);
-        }),
-        (t.__SV = 1));
+                    r < s.length;
+                    r++
+                )
+                    g(c, s[r]);
+                t._i.push([n, a, p]);
+            }),
+            (t.__SV = 1));
 })(document, window.posthog || []);
 
 posthog.init("phc_W4DPbbp1Qbz4lPVtWrFF54GFUabBHpKzNJx9U6fryBZ", {
-    api_host: "https://posthog.elouan.xyz/ingest",
+    api_host: "https://t.e5g.dev",
     ui_host: "https://us.posthog.com",
-    person_profiles: "always",
+    cookieless_mode: 'always',
 });
 
 fetch("/manifest.json")
@@ -118,8 +118,8 @@ document.addEventListener("DOMContentLoaded", () => {
         // === site stats table ===
         console.log("%csite info:", "color: #4680ff; font-family: 'JetBrains Mono', 'SF Mono', 'Roboto Mono', 'Cascadia Code', monospace; font-size: 1.5em; font-weight: bold; border-bottom: 2px solid #4680ff; padding-bottom: 2px")
         console.table({
-            "stack":     { value: "HTML + CSS + vanilla JS" },
-            "hosting":   { value: "Vercel" },
+            "stack": { value: "HTML + CSS + vanilla JS" },
+            "hosting": { value: "Vercel" },
             "analytics": { value: "PostHog" },
             "framework": { value: "none. raw dogging it." },
             "source": { value: "github.com/elouangrimm/elouan.xyz" },
