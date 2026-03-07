@@ -83,6 +83,11 @@ const isChromium =
     ) ?? false);
 
 document.addEventListener("DOMContentLoaded", () => {
+    // Only log the "goofy stuff" on the homepage
+    if (window.location.pathname !== "/" && window.location.pathname !== "/index.html") {
+        return;
+    }
+
     setTimeout(function () {
         console.log("\n \n \n")
 
@@ -132,5 +137,5 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
 
-    }, 500)
+    }, 250)
 });
