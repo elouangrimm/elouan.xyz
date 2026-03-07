@@ -8,227 +8,222 @@ document.addEventListener('DOMContentLoaded', () => {
     const repoOwner = 'elouangrimm';
     const repoName = 'photos';
     const branch = 'main';
-    const repoRootUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/`;
+    const treeUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/git/trees/${branch}?recursive=1`;
     const rawBaseUrl = `https://raw.githubusercontent.com/${repoOwner}/${repoName}/${branch}/`;
 
-    let imagesData = []; // Store { src, description, element }
-    let currentIndex = -1;
+    const state = {
+        images: [],
+        currentIndex: -1,
+        descriptionLoads: new Map()
+    };
 
-    async function fetchImages() {
-        try {
-            console.log("Fetching repository contents from:", repoRootUrl);
-            const response = await fetch(repoRootUrl); // Fetch root directory contents
-            console.log("GitHub API response status:", response.status, response.statusText);
+    function isImagePath(path) {
+        return /\.(avif|gif|jpe?g|png|webp)$/i.test(path);
+    }
 
-            if (!response.ok) {
-                let errorBody = 'Could not read error body.';
-                try { errorBody = await response.text(); } catch (e) { /* ignore */ }
-                console.error("GitHub API Error Response Body:", errorBody);
-                throw new Error(`GitHub API Error: ${response.status} ${response.statusText}.`);
+    function isPreviewPath(path) {
+        return /(^|\/)previews\//i.test(path);
+    }
+
+    function encodePath(path) {
+        return path
+            .split('/')
+            .map((segment) => encodeURIComponent(segment))
+            .join('/');
+    }
+
+    function getRawUrl(path) {
+        return `${rawBaseUrl}${encodePath(path)}`;
+    }
+
+    function getFileName(path) {
+        return path.split('/').pop() || path;
+    }
+
+    function getFallbackDescription(path) {
+        const label = getFileName(path)
+            .replace(/\.[^.]+$/, '')
+            .replace(/[._-]+/g, ' ')
+            .replace(/\s+/g, ' ')
+            .trim();
+
+        return label;
+    }
+
+    function renderMessage(message) {
+        gallery.innerHTML = `<p>${message}</p>`;
+    }
+
+    async function fetchImageList() {
+        const response = await fetch(treeUrl);
+
+        if (!response.ok) {
+            const errorText = await response.text().catch(() => '');
+            throw new Error(errorText || `${response.status} ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        const paths = new Set(
+            (data.tree || [])
+                .filter((item) => item.type === 'blob')
+                .map((item) => item.path)
+        );
+
+        return Array.from(paths)
+            .filter((path) => isImagePath(path) && !isPreviewPath(path))
+            .sort((a, b) => b.localeCompare(a, undefined, { numeric: true, sensitivity: 'base' }))
+            .map((path) => {
+                return {
+                    path,
+                    fileName: getFileName(path),
+                    url: getRawUrl(path),
+                    description: getFallbackDescription(path),
+                    descriptionLoaded: false
+                };
+            });
+    }
+
+    function renderGallery() {
+        if (state.images.length === 0) {
+            renderMessage('No photos found.');
+            return;
+        }
+
+        const fragment = document.createDocumentFragment();
+
+        state.images.forEach((image, index) => {
+            const img = document.createElement('img');
+            img.src = image.url;
+            img.alt = image.description || `Photo ${index + 1}`;
+            img.loading = 'lazy';
+            img.decoding = 'async';
+            img.dataset.index = String(index);
+            img.style.backgroundColor = 'var(--c800)';
+            fragment.appendChild(img);
+        });
+
+        gallery.replaceChildren(fragment);
+    }
+
+    function updateFullscreen(image) {
+        fullscreenImage.src = image.url;
+        fullscreenImage.alt = image.description || image.fileName;
+        imageDescription.textContent = image.description || '';
+        fullscreenContent.scrollTop = 0;
+    }
+
+    async function loadExifDescription(image) {
+        if (image.descriptionLoaded || typeof EXIF === 'undefined') {
+            return;
+        }
+
+        if (state.descriptionLoads.has(image.path)) {
+            return state.descriptionLoads.get(image.path);
+        }
+
+        const request = (async () => {
+            try {
+                const response = await fetch(image.url);
+                if (!response.ok) {
+                    throw new Error(`Failed to load EXIF: ${response.status}`);
+                }
+
+                const blob = await response.blob();
+                const description = await new Promise((resolve) => {
+                    EXIF.getData(blob, function () {
+                        resolve(EXIF.getTag(this, 'ImageDescription') || '');
+                    });
+                });
+
+                if (typeof description === 'string' && description.trim()) {
+                    image.description = description.trim();
+                }
+            } catch (error) {
+                console.warn(`Could not read EXIF for ${image.fileName}:`, error);
+            } finally {
+                image.descriptionLoaded = true;
+                state.descriptionLoads.delete(image.path);
+
+                if (state.currentIndex !== -1 && state.images[state.currentIndex] === image) {
+                    imageDescription.textContent = image.description || '';
+                }
             }
+        })();
 
-            const files = await response.json();
-            console.log("Raw file list received:", files);
+        state.descriptionLoads.set(image.path, request);
+        return request;
+    }
 
-            const imageFiles = files.filter(file =>
-                file.type === 'file' && /\.(jpe?g|png|gif|webp)$/i.test(file.name)
-            );
-            console.log("Filtered image files:", imageFiles);
+    function preloadAdjacentImages(index) {
+        if (state.images.length < 2) {
+            return;
+        }
 
-            if (imageFiles.length === 0) {
-                gallery.innerHTML = '<p>No images found in the repository root (after filtering).</p>';
+        const nextIndex = (index + 1) % state.images.length;
+        const prevIndex = (index - 1 + state.images.length) % state.images.length;
+
+        [nextIndex, prevIndex].forEach((imageIndex) => {
+            const image = state.images[imageIndex];
+            if (!image) {
                 return;
             }
 
-            gallery.innerHTML = ''; // Clear loading message
+            const preloadImage = new Image();
+            preloadImage.src = image.url;
+        });
+    }
 
-            // --- Process each image file ---
-            imageFiles.forEach((file, index) => {
-                const fileName = file.name;
-                const fullResUrl = rawBaseUrl + fileName;
-                const previewUrl = rawBaseUrl + 'previews/' + fileName;
-
-                const imgElement = document.createElement('img');
-                imgElement.alt = fileName; // Set alt text immediately
-                imgElement.loading = 'lazy'; // Still lazy load grid images
-
-                // Initial placeholder background (optional)
-                imgElement.style.backgroundColor = 'var(--c800)';
-
-                // Store comprehensive data
-                const imageData = {
-                    previewUrl: previewUrl,
-                    fullResUrl: fullResUrl,
-                    description: `Loading description for ${fileName}...`,
-                    element: imgElement,
-                    fileName: fileName,
-                    hasTriedPreview: false, // Flag to track if preview check completed
-                    hasPreview: false      // Flag indicating if preview was successfully loaded
-                };
-                imagesData.push(imageData); // Store data early
-
-                // Append element to DOM *before* setting src for preview check
-                gallery.appendChild(imgElement);
-
-                // --- Add click listener (refers to imageData in closure) ---
-                imgElement.addEventListener('click', () => {
-                    // Find the index again based on the element, in case order changes later
-                    const clickedIndex = imagesData.findIndex(item => item.element === imgElement);
-                    if (clickedIndex !== -1) {
-                        currentIndex = clickedIndex;
-                        openFullscreen(imagesData[currentIndex]);
-                    } else {
-                        console.error("Could not find image data for clicked element:", imgElement);
-                    }
-                });
-
-                // --- Asynchronously check for preview and set src ---
-                checkAndLoadPreview(imageData, imgElement);
-            });
-
-        } catch (error) {
-            console.error('Error caught in fetchImages:', error);
-            gallery.innerHTML = `<p>Error loading images: ${error.message}. Check console.</p>`;
+    function showImageAtIndex(index) {
+        if (state.images.length === 0) {
+            return;
         }
+
+        state.currentIndex = (index + state.images.length) % state.images.length;
+        const image = state.images[state.currentIndex];
+        updateFullscreen(image);
+        preloadAdjacentImages(state.currentIndex);
+        loadExifDescription(image);
     }
 
-    // --- Function to check for preview, load it or fallback, then fetch EXIF ---
-    function checkAndLoadPreview(imageData, imgElement) {
-        const previewTester = new Image(); // Use temporary Image object to test loading
-
-        previewTester.onload = () => {
-            // Preview exists and loaded successfully
-            console.log(`Preview found for ${imageData.fileName}`);
-            imgElement.src = imageData.previewUrl; // Use preview URL for the grid image
-            imageData.hasPreview = true;
-            imageData.hasTriedPreview = true;
-            fetchExifDescription(imageData); // Fetch EXIF (always from full-res)
-        };
-
-        previewTester.onerror = () => {
-            // Preview doesn't exist or failed to load (e.g., 404)
-            console.log(`Preview not found/failed for ${imageData.fileName}, using full resolution.`);
-            imgElement.src = imageData.fullResUrl; // Use full-res URL as fallback for the grid
-            imageData.hasPreview = false;
-            imageData.hasTriedPreview = true;
-            fetchExifDescription(imageData); // Fetch EXIF (always from full-res)
-        };
-
-        // Start loading the preview image (after handlers are set)
-        previewTester.src = imageData.previewUrl;
-    }
-
-
-    // --- Fetch EXIF Description (MODIFIED: uses fullResUrl) ---
-    async function fetchExifDescription(imageData) {
-        // Only proceed if preview check is done (prevents race conditions if needed)
-        // Although EXIF fetch is independent, might be good practice if dependent logic existed
-        // if (!imageData.hasTriedPreview) {
-        //     console.log(`Skipping EXIF fetch for ${imageData.fileName} until preview check completes.`);
-        //     return;
-        // }
-
-        try {
-            // ALWAYS fetch EXIF from the full-resolution image
-            const response = await fetch(imageData.fullResUrl);
-            if (!response.ok) throw new Error(`Failed to fetch image for EXIF: ${response.status}`);
-            const blob = await response.blob();
-
-            EXIF.getData(blob, function () {
-                const description = EXIF.getTag(this, "ImageDescription");
-                imageData.description = description || ''; // Store description or empty string
-
-                // Update description if this image is currently fullscreen
-                if (currentIndex !== -1 && imagesData[currentIndex] === imageData && fullscreenOverlay.style.display !== 'none') {
-                    imageDescription.textContent = imageData.description;
-                }
-            });
-        } catch (error) {
-            console.warn(`Could not fetch/read EXIF for ${imageData.fileName} from ${imageData.fullResUrl}:`, error);
-            imageData.description = ''; // Set empty description on error
-            if (currentIndex !== -1 && imagesData[currentIndex] === imageData && fullscreenOverlay.style.display !== 'none') {
-                imageDescription.textContent = ''; // Clear description on error
-            }
-        }
-    }
-
-
-    // --- Open Fullscreen (MODIFIED: uses fullResUrl) ---
-    function openFullscreen(imageData) {
-        // Always display the full-resolution image in fullscreen
-        fullscreenImage.src = imageData.fullResUrl;
-        fullscreenImage.alt = imageData.fileName;
-        imageDescription.textContent = imageData.description || 'Loading description...'; // Show placeholder or fetched description
+    function openFullscreen(index) {
         fullscreenOverlay.style.display = 'flex';
         document.body.classList.add('fullscreen-open');
         document.addEventListener('keydown', handleKeydown);
-        fullscreenContent.scrollTop = 0;
-
-        // Preload next and previous full-res images for smoother navigation (optional)
-        // preloadAdjacentImages(currentIndex);
+        showImageAtIndex(index);
     }
 
-    // --- Close Fullscreen (no changes needed) ---
     function closeFullscreen() {
         fullscreenOverlay.style.display = 'none';
         fullscreenImage.src = '';
         imageDescription.textContent = '';
         document.body.classList.remove('fullscreen-open');
         document.removeEventListener('keydown', handleKeydown);
-        currentIndex = -1;
+        state.currentIndex = -1;
     }
 
-    // --- Show Image by Index (MODIFIED: uses fullResUrl) ---
-    function showImageAtIndex(index) {
-        if (index < 0 || index >= imagesData.length) return; // Bounds check
-
-        currentIndex = index;
-        const imageData = imagesData[currentIndex];
-        // Always show full-res in the fullscreen view
-        fullscreenImage.src = imageData.fullResUrl;
-        fullscreenImage.alt = imageData.fileName;
-        imageDescription.textContent = imageData.description || ''; // Show fetched description or empty
-
-        // Ensure EXIF data is fetched if it somehow wasn't (unlikely with new flow)
-        // if (imageData.description.startsWith('Loading description')) {
-        //     fetchExifDescription(imageData);
-        // }
-
-        fullscreenContent.scrollTop = 0;
-        // Preload next/prev when navigating
-        // preloadAdjacentImages(currentIndex);
-    }
-
-    // --- Optional: Preload adjacent full-res images ---
-    function preloadAdjacentImages(index) {
-        const nextIndex = (index + 1) % imagesData.length;
-        const prevIndex = (index - 1 + imagesData.length) % imagesData.length;
-
-        if (nextIndex !== index && imagesData[nextIndex]) {
-            const nextImage = new Image();
-            nextImage.src = imagesData[nextIndex].fullResUrl;
-            // console.log("Preloading next:", imagesData[nextIndex].fileName);
-        }
-        if (prevIndex !== index && imagesData[prevIndex]) {
-            const prevImage = new Image();
-            prevImage.src = imagesData[prevIndex].fullResUrl;
-            // console.log("Preloading prev:", imagesData[prevIndex].fileName);
-        }
-    }
-
-
-    // --- Event Handlers (no changes needed for keydown, overlay click) ---
     function handleKeydown(event) {
         if (event.key === 'Escape') {
             closeFullscreen();
-        } else if (event.key === 'ArrowRight') {
-            const nextIndex = (currentIndex + 1) % imagesData.length;
-            showImageAtIndex(nextIndex);
-        } else if (event.key === 'ArrowLeft') {
-            const prevIndex = (currentIndex - 1 + imagesData.length) % imagesData.length;
-            showImageAtIndex(prevIndex);
+            return;
+        }
+
+        if (event.key === 'ArrowRight') {
+            showImageAtIndex(state.currentIndex + 1);
+        }
+
+        if (event.key === 'ArrowLeft') {
+            showImageAtIndex(state.currentIndex - 1);
         }
     }
+
+    gallery.addEventListener('click', (event) => {
+        const clickedImage = event.target.closest('img[data-index]');
+        if (!clickedImage) {
+            return;
+        }
+
+        openFullscreen(Number(clickedImage.dataset.index));
+    });
 
     fullscreenOverlay.addEventListener('click', (event) => {
         if (event.target === fullscreenOverlay) {
@@ -236,6 +231,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- Initialize ---
-    fetchImages();
+    async function init() {
+        renderMessage('Loading my photos...');
+
+        try {
+            state.images = await fetchImageList();
+            renderGallery();
+        } catch (error) {
+            console.error('Error loading photos:', error);
+            renderMessage(`Error loading photos: ${error.message}`);
+        }
+    }
+
+    init();
 });
