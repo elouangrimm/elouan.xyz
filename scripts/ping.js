@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const endpoint = "https://ntfy.sh/elouan_ping";
-    const defaultTitle = "Anonymous ping";
+    const defaultTitle = "elouan.xyz/ping";
     let toastTimer;
 
     const setStatus = (message, type = "idle") => {
