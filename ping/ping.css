@@ -1,0 +1,205 @@
+.ping-page {
+    min-height: calc(100vh - 60px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.ping-shell {
+    position: relative;
+    margin-top: 2rem;
+    padding: 1.5rem;
+    border: 1px solid var(--c700);
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 35%),
+        var(--shade-1);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+}
+
+.ping-command {
+    margin: 0 0 1rem;
+    color: var(--emerald);
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+}
+
+.ping-shell h2 {
+    margin: 0;
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+}
+
+.ping-intro,
+.ping-warning,
+.ping-helper,
+.ping-status {
+    max-width: 36rem;
+}
+
+.ping-intro {
+    margin: 1rem 0 0;
+    color: var(--c300);
+}
+
+.ping-warning {
+    margin: 1rem 0 2rem;
+    color: var(--amber);
+    font-family: var(--font-mono);
+}
+
+.ping-form {
+    display: grid;
+    gap: 1.25rem;
+}
+
+.ping-label {
+    display: grid;
+    gap: 0.55rem;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    color: var(--c200);
+}
+
+.ping-input,
+.ping-textarea {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border: 1px solid var(--c700);
+    background-color: var(--c900);
+    color: var(--c050);
+    font: inherit;
+    box-sizing: border-box;
+    transition: border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+
+.ping-input::placeholder,
+.ping-textarea::placeholder {
+    color: var(--c500);
+}
+
+.ping-input:focus,
+.ping-textarea:focus {
+    outline: none;
+    border-color: var(--blue);
+    box-shadow: 0 0 0 1px var(--blue);
+}
+
+.ping-textarea {
+    min-height: 10rem;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+.ping-helper {
+    margin: -0.5rem 0 0;
+    color: var(--c400);
+    font-size: 0.95rem;
+}
+
+.ping-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+}
+
+.ping-submit {
+    min-width: 7rem;
+    padding: 0.9rem 1.3rem;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    transition: transform 160ms ease, background-color 160ms ease, outline-color 160ms ease;
+}
+
+.ping-submit:hover {
+    transform: translateY(-1px);
+}
+
+.ping-submit:disabled {
+    cursor: wait;
+    opacity: 0.72;
+    transform: none;
+}
+
+.ping-status {
+    margin: 0;
+    color: var(--c300);
+    font-size: 0.95rem;
+}
+
+.ping-status.is-error {
+    color: var(--coral);
+}
+
+.ping-status.is-success {
+    color: var(--green);
+}
+
+.ping-toast-region {
+    position: fixed;
+    left: 50%;
+    bottom: 1.25rem;
+    transform: translateX(-50%);
+    width: min(32rem, calc(100vw - 1.5rem));
+    z-index: 1200;
+    pointer-events: none;
+}
+
+.ping-toast {
+    opacity: 0;
+    transform: translate(-50%, 1.5rem);
+    visibility: hidden;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 100%;
+    padding: 1rem 1.1rem;
+    border: 1px solid var(--green);
+    background: linear-gradient(180deg, rgba(70, 255, 129, 0.08), rgba(12, 10, 9, 0.96));
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+    transition: opacity 220ms ease, transform 220ms ease, visibility 220ms ease;
+}
+
+.ping-toast.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+}
+
+.ping-toast-kicker {
+    margin: 0 0 0.35rem;
+    color: var(--green);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.72rem;
+    font-family: var(--font-mono);
+}
+
+.ping-toast-title {
+    margin: 0;
+    color: var(--c050);
+    font-size: 1rem;
+}
+
+.ping-toast-message {
+    margin: 0.45rem 0 0;
+    color: var(--c300);
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+@media (max-width: 640px) {
+    .ping-shell {
+        padding: 1.15rem;
+    }
+
+    .ping-page {
+        justify-content: flex-start;
+    }
+
+    .ping-toast-region {
+        width: calc(100vw - 1rem);
+        bottom: 0.75rem;
+    }
+}

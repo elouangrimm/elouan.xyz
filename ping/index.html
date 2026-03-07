@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="description" content="Send Elouan an anonymous push notification." />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512x512.png">
+    <link rel="stylesheet" href="/styles/style.css" />
+    <link rel="stylesheet" href="/ping/ping.css" />
+    <title>ping // elouan.xyz</title>
+
+    <script src="/scripts/analytics.js" defer></script>
+</head>
+
+<body>
+    <main class="ping-page">
+        <h1 class="heading top-title">
+            <a href="/">elouan.xyz</a> // ping
+        </h1>
+
+        <section class="ping-shell" aria-labelledby="ping-title-heading">
+            <p class="ping-command">$ ping elouan</p>
+            <h2 class="heading" id="ping-title-heading">send an anonymous push</h2>
+            <p class="ping-intro">
+                When you submit the form below, it sends a push notification straight to my phone via ntfy,
+                without asking who you are. I reserve the right to post anything you send.
+            </p>
+
+            <form class="ping-form" id="ping-form">
+                <label class="ping-label" for="ping-title">
+                    Title
+                    <input
+                        class="ping-input"
+                        id="ping-title"
+                        name="title"
+                        type="text"
+                        maxlength="120"
+                        placeholder="Omg hi"
+                        autocomplete="off"
+                    />
+                </label>
+
+                <label class="ping-label" for="ping-message">
+                    Message
+                    <textarea
+                        class="ping-textarea"
+                        id="ping-message"
+                        name="message"
+                        maxlength="4000"
+                        placeholder="With great power comes great responsibility."
+                        required
+                    ></textarea>
+                </label>
+
+                <p class="ping-helper">Messages are sent to ntfy.sh/elouan_ping and appear as a phone notification.</p>
+
+                <div class="ping-actions">
+                    <button class="ping-submit" id="ping-submit" type="submit">Send</button>
+                    <p class="ping-status" id="ping-status" aria-live="polite"></p>
+                </div>
+            </form>
+
+            <noscript>
+                <p class="ping-status is-error">JavaScript is required to send the notification :(</p>
+            </noscript>
+        </section>
+    </main>
+
+    <div class="ping-toast-region" aria-live="polite" aria-atomic="true">
+        <article class="ping-toast" id="ping-toast" role="status" hidden>
+            <p class="ping-toast-kicker">notification preview</p>
+            <h3 class="ping-toast-title" id="ping-toast-title">Omg hi</h3>
+            <p class="ping-toast-message" id="ping-toast-message"></p>
+        </article>
+    </div>
+
+    <script src="/scripts/seo.js" defer></script>
+    <script src="/scripts/ping.js" defer></script>
+</body>
+
+</html>
