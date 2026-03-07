@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const toastTitle = document.getElementById("ping-toast-title");
     const toastMessage = document.getElementById("ping-toast-message");
 
-    if (!form || !titleInput || !messageInput || !status || !submitButton || !toast || !toastTitle || !toastMessage) {
+    if (!form || !messageInput || !status || !submitButton || !toast || !toastTitle || !toastMessage) {
         return;
     }
 
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
 
-        const rawTitle = titleInput.value.trim();
+        const rawTitle = titleInput ? titleInput.value.trim() : "";
         const rawMessage = messageInput.value.trim();
         const title = rawTitle || defaultTitle;
 
@@ -91,7 +91,12 @@ document.addEventListener("DOMContentLoaded", () => {
             setStatus("Ping sent.", "success");
             showToast(title, rawMessage);
             form.reset();
-            titleInput.focus();
+
+            if (titleInput) {
+                titleInput.focus();
+            } else {
+                messageInput.focus();
+            }
         } catch (error) {
             const message = error instanceof Error ? error.message : "The notification could not be delivered.";
             setStatus(message, "error");
