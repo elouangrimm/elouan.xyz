@@ -7,7 +7,6 @@
 
 .ping-shell {
     position: relative;
-    margin-top: 2rem;
     padding: 1.5rem;
     border: 1px solid var(--c700);
     background:
@@ -16,9 +15,11 @@
     box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
 }
 
-.ping-shell h2 {
+.ping-shell h2 h3, .ping-shell .heading {
     margin: 0;
-    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    font-size: clamp(1.35rem, 5vw, 2.6rem);
+    margin-block-start: auto;
+    margin-block-end: auto;
 }
 
 .ping-intro,
@@ -77,7 +78,7 @@
 }
 
 .ping-textarea {
-    min-height: 10rem;
+    min-height: 6rem;
     resize: vertical;
     line-height: 1.6;
 }
@@ -148,7 +149,7 @@
     width: 100%;
     padding: 1rem 1.1rem;
     border: 1px solid var(--emerald);
-    background: linear-gradient(180deg, #10b98114), rgba(12, 10, 9, 0.96));
+    background: linear-gradient(180deg, #10b98114, rgba(12, 10, 9, 0.96));
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
     transition: opacity 220ms ease, transform 220ms ease, visibility 220ms ease;
 }
