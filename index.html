@@ -71,7 +71,7 @@
             </li>
             <li>
                 <a href="https://bsky.app/profile/elouan.xyz" style="--color: var(--bluesky)" target="_blank"><span
-                        class="has-hidden-tooltip" data-tooltip="@elouan.xyz">Bluesky</span></a>
+                        class="has-hidden-tooltip" data-tooltip="@elouan.xyz">Bluesky</span> <i id="bluesky-follower-container" style="display: none;">(<span id="bluesky-follower-count"></span>)</i></a>
             </li>
             <li>
                 <a href="mailto:hello@elouan.xyz" style="--color: var(--email)">
@@ -120,6 +120,18 @@
         window.addEventListener('load', () => {
             quicklink.listen();
         });
+    </script>
+    <script>
+        const handle = "elouan.xyz";
+        fetch(`https://public.api.bsky.app/xrpc/app.bsky.actor.getProfile?actor=${handle}`, { cache: "force-cache" })
+            .then(res => res.json())
+            .then(data => {
+                if (data.followersCount !== undefined) {
+                    document.getElementById('bluesky-follower-count').innerText = data.followersCount;
+                    document.getElementById('bluesky-follower-container').style.display = 'inline';
+                }
+            })
+            .catch(err => console.error('Failed to fetch Bluesky followers:', err));
     </script>
 </body>
 
