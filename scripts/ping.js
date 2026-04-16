@@ -68,9 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
         submitButton.disabled = true;
         submitButton.textContent = "Sending...";
 
-        if (window?.posthog) {
-            window.posthog.capture("ping_sent", { message: rawMessage });
-        }
+        window.posthog.capture("ping_sent", { message: rawMessage });
 
         try {
             const url = new URL(endpoint);
