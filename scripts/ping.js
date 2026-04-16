@@ -68,6 +68,8 @@ document.addEventListener("DOMContentLoaded", () => {
         submitButton.disabled = true;
         submitButton.textContent = "Sending...";
 
+        if (posthog)
+
         try {
             const url = new URL(endpoint);
             url.searchParams.set("title", title);
