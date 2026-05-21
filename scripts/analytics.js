@@ -68,8 +68,7 @@
 
 posthog.init("phc_W4DPbbp1Qbz4lPVtWrFF54GFUabBHpKzNJx9U6fryBZ", {
     api_host: "https://t.elouan.xyz",
-    ui_host: "https://us.posthog.com",
-    cookieless_mode: 'always',
+    ui_host: "https://us.posthog.com"
 });
 
 const manifestPromise = fetch("/manifest.json")
