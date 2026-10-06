@@ -7,7 +7,7 @@
 //   WHATSAPP_TOKEN_1..9    API token of agent N (agent 1 also falls back to WHATSAPP_TOKEN)
 //   WHATSAPP_OWNER_ID      your id as returned by the API, e.g. "user:50972923564215"
 //   WHATSAPP_OWNER_ID_1..9 (optional) per-agent override of the recipient
-//   PUBLIC_AGENTS          (optional) comma list of agents that accept keyless POSTs,
+//   PUBLIC_AGENTS          (optional) comma list of agents that accept keyless GET/POST,
 //                          e.g. "1" for your public ping page. Rate-limited harder.
 //   NTFY_FALLBACK_TOPIC    (optional) if WhatsApp delivery fails, send to this ntfy topic
 
@@ -128,8 +128,8 @@ module.exports = async (req, res) => {
         if (!process.env.AGENT_API_KEY || !safeEqual(key, process.env.AGENT_API_KEY)) {
             return fail(401, "Invalid key");
         }
-    } else if (req.method === "POST" && publicAgents.includes(agentNum)) {
-        isPublic = true; // keyless, POST only (so link prefetchers can't trigger it)
+    } else if (publicAgents.includes(agentNum)) {
+        isPublic = true; // keyless GET or POST, with the stricter public limits below
     } else {
         return fail(401, "Missing key");
     }
