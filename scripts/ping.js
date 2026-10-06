@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const endpoint = "/api/agent";
     const agent = 1; // which WhatsApp agent receives pings from this page (must be in PUBLIC_AGENTS)
-const defaultTitle = "elouan.xyz/ping";
+const defaultTitle = "*NEW PING:*";
 let toastTimer;
 
 const setStatus = (message, type = "idle") => {
